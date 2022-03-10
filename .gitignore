@@ -1,4 +1,7 @@
 # 깃허브 커밋 제외 파일
 
+# 맥 폴더 설정 파일
+*.DS_Store
+
 # 리액트 실행 시 상대적으로 생기는 파일 (js, css, media)
-/Project_advise_clothes/src/main/resources/static/static/
+/Project_advise_clothes/src/main/resources/static/static
