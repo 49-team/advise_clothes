@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import './Signup.scss';
 import {Form} from 'react-bootstrap';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 
 function Signup() {
 
-    const [id, setId] = useState('');
+    const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [nick, setNick] = useState('');
@@ -40,11 +41,12 @@ function Signup() {
         if(password !== confirmPassword) {
             return setPasswordError(true);
         }
-        if(id.length < 4) {
+        if(account.length < 4) {
             return setIdError(true);
         }
+
         console.log({
-            id,
+            account,
             password,
             confirmPassword,
             nick,
@@ -60,7 +62,7 @@ function Signup() {
         const idType = /^[A-Za-z0-9+]{0,15}$/;
         if (idType.test(e.target.value)) {
             setIdError(e.target.value.length <4);
-            setId(e.target.value);
+            setAccount(e.target.value);
         }
     }
 
@@ -123,7 +125,7 @@ function Signup() {
             <hr/>
             <form onSubmit={onSubmit}>
                 {/* // className='signForm'> */}
-                <input name="id" type="text" value={id} onChange={onIdHandler} className="idInput" placeholder="아이디"/>
+                <input name="id" type="text" value={account} onChange={onIdHandler} className="idInput" placeholder="아이디"/>
                 {idError && <div style={{color : 'red'}}>아이디를 4자리 이상 입력해주세요!!</div>}
 
                 <input name="password" type="password" value={password} onChange={onPasswordHandler} placeholder="비밀번호"/>

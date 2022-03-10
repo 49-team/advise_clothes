@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Success.scss';
 
 function Success() {
-    var [seconds,setSeconds] = useState(5);
+    let [seconds,setSeconds] = useState(5);
 
     useEffect(()=> {
         setTimeout(()=> {
