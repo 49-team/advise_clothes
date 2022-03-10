@@ -51,6 +51,10 @@ function App() {
                     <Route path="/community">
                         <Community/>
                     </Route>
+
+                    <Route path="*">
+                        <NotFound/>
+                    </Route>
                 </Switch>
 
             </div>
