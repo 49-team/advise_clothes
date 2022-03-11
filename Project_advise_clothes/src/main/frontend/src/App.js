@@ -7,6 +7,7 @@ import Community from './Community';
 import Weather from './Weather';
 import Recommend from './Recommend';
 import Success from './Success';
+import NotFound from "./NotFound";
 
 function App() {
     return (

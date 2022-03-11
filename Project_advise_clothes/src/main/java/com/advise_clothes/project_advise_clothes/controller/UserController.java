@@ -37,6 +37,11 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userToFind));
     }
 
+    @GetMapping("/list")
+    public List<User> userList() {
+        return userService.findAll();
+    }
+
     @PostMapping("")
     public ResponseEntity<User> joinUs(@RequestBody User user) {
         return userService.findByUserForNotDelete(user).map(value -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(value))
