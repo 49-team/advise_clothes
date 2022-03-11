@@ -7,26 +7,20 @@ import Community from './Community';
 import Weather from './Weather';
 import Recommend from './Recommend';
 import Success from './Success';
-import NotFound from "./NotFound";
+import NotFound from './NotFound';
+import Header from './Header';
+import HeaderLogin from './HeaderLogin';
 
 function App() {
     return (
         <div className="App">
             <header>
-                <Navbar className="d-flex" bg="light" expand="lg" fixed='top'>
-                    <Container>
-                        <Navbar.Brand as={Link} to="/">Advise-Clothes</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav" className='collapse navbar-collapse justify-content-end'>
-                            <Nav className="ml-auto">
-                                <Nav.Link as={Link} to="/" className='px-3'>Home</Nav.Link>
-                                <Nav.Link as={Link} to="/login" className='px-3' >Login</Nav.Link>
-                                <Nav.Link as={Link} to="/signUp" className='px-3'>Sign Up</Nav.Link>
-                                <Nav.Link as={Link} to="/community">Community</Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
+                <Switch>
+                    <Header/>
+
+                    <HeaderLogin/>
+                    {/* HeaderLogin 로그인 했을 때 로그인 정보랑 마이페이지 연결되게 */}
+                </Switch>
             </header>
 
             <div className='content d-flex'>
@@ -37,25 +31,16 @@ function App() {
                         <Recommend/>
                     </Route>
 
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
+                    <Route path="/login" component={Login}/>
 
-                    <Route path="/signUp">
-                        <Signup/>
-                    </Route>
+                    <Route path="/signUp" component={Signup}/>
 
-                    <Route path="/success">
-                        <Success/>
-                    </Route>
+                    <Route path="/success" component={Success}/>
 
-                    <Route path="/community">
-                        <Community/>
-                    </Route>
+                    <Route path="/community" component={Community}/>
 
-                    <Route path="*">
-                        <NotFound/>
-                    </Route>
+                    <Route path="*" component={NotFound}/>
+
                 </Switch>
 
             </div>
