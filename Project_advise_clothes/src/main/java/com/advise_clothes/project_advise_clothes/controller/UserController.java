@@ -19,14 +19,15 @@ public class UserController {
     /**
      * 로그인
      * 이후 휴대폰 번호나 이메일로 로그인 하게 할 건지 확인
-     *
+     * @param account
+     * @param password
      * @return
      */
     @GetMapping("")
     public ResponseEntity<User> login(@RequestParam String account,
                                       @RequestParam String password) {
         User user = User.builder().account(account).password(password).build();
-        return userService.findUserByIdAndPassword(user).map(value -> ResponseEntity.status(HttpStatus.OK).body(value))
+        return userService.findByAccountAndPassword(user).map(value -> ResponseEntity.status(HttpStatus.OK).body(value))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(user));
     }
 
