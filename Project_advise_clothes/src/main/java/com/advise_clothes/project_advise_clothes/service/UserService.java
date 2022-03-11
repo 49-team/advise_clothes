@@ -32,8 +32,10 @@ public class UserService {
 
     /**
      * 로그인
+     * @param user 'account' and 'password'가 들어있는 User 객체
+     * @return
      */
-    public Optional<User> findUserByIdAndPassword(User user) {
+    public Optional<User> findByAccountAndPassword(User user) {
         return userRepository.findByAccountAndPasswordAndDeletedReason(user.getAccount(), user.getPassword(), NO_DELETE);
     }
 
