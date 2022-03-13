@@ -4,6 +4,7 @@ import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,23 +20,32 @@ public class UserController {
     /**
      * 로그인
      * 이후 휴대폰 번호나 이메일로 로그인 하게 할 건지 확인
-     * @param account
-     * @param password
      * @return
      */
     @GetMapping("")
-    public ResponseEntity<User> login(@RequestParam String account,
-                                      @RequestParam String password) {
-        User user = User.builder().account(account).password(password).build();
-        return userService.findByAccountAndPassword(user).map(value -> ResponseEntity.status(HttpStatus.OK).body(value))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(user));
+    public ResponseEntity<Boolean> getUser(@RequestParam(required = false) String account,
+                                           @RequestParam(required = false) String password,
+                                           @RequestParam(required = false) String email,
+                                           @RequestParam(required = false) String phoneNumber
+                                        ) {
+        User user = User.builder().account(account)
+                .password(password)
+                .email(email)
+                .phoneNumber(phoneNumber).build();
+
+        return password==null? userService.findByUserForNotDelete(user)
+                                    .map(value -> ResponseEntity.status(HttpStatus.OK).body(true))
+                                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(false))
+                : userService.findByAccountAndPassword(user)
+                                    .map(value -> ResponseEntity.status(HttpStatus.OK).body(true))
+                                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(false));
     }
 
     @GetMapping("/{account}")
     public ResponseEntity<User> getUserByAccount(@PathVariable String account) {
         User userToFind = User.builder().account(account).build();
         return userService.findByUserForNotDelete(userToFind).map(value -> ResponseEntity.status(HttpStatus.OK).body(value))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userToFind));
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
     @GetMapping("/list")
@@ -47,7 +57,7 @@ public class UserController {
     public ResponseEntity<User> joinUs(@RequestBody User user) {
         return userService.findByUserForNotDelete(user).map(value -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(value))
                 .orElseGet(() -> (user.getAccount() != null || user.getPassword() != null || user.getNickname() != null || user.getEmail() != null || user.getPhoneNumber() != null )?
-                        ResponseEntity.status(HttpStatus.OK).body(userService.createUser(user)) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user));
+                        ResponseEntity.status(HttpStatus.OK).body(userService.createUser(user)) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
     /**
@@ -69,7 +79,7 @@ public class UserController {
                     if (user.getWeight() != null) { value.setWeight(user.getWeight()); }
                     return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
                 })
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(user));
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
 
     }
 }
