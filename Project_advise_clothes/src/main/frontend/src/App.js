@@ -10,15 +10,21 @@ import Success from './Success';
 import NotFound from './NotFound';
 import Header from './Header';
 import HeaderLogin from './HeaderLogin';
+import Mypage from './Mypage';
+import PrivateRoute from './PrivateRoute';
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+
 
 function App() {
+    const [cookies, setCookies, removeCookie] = useCookies(['info']);
+
     return (
         <div className="App">
             <header>
                 <Switch>
-                    <Header/>
+                    {cookies.info? <HeaderLogin/> : <Header/>}
 
-                    <HeaderLogin/>
                     {/* HeaderLogin 로그인 했을 때 로그인 정보랑 마이페이지 연결되게 */}
                 </Switch>
             </header>
@@ -38,6 +44,8 @@ function App() {
                     <Route path="/success" component={Success}/>
 
                     <Route path="/community" component={Community}/>
+
+                    <Route path="/mypage" component={Mypage}/>
 
                     <Route path="*" component={NotFound}/>
 
