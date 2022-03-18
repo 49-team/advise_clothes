@@ -23,7 +23,7 @@ public class UserController {
      * @return
      */
     @GetMapping("")
-    public ResponseEntity<Boolean> getUser(@RequestParam(required = false) String account,
+    public ResponseEntity<User> getUser(@RequestParam(required = false) String account,
                                            @RequestParam(required = false) String password,
                                            @RequestParam(required = false) String email,
                                            @RequestParam(required = false) String phoneNumber
@@ -34,11 +34,11 @@ public class UserController {
                 .phoneNumber(phoneNumber).build();
 
         return password==null? userService.findByUserForNotDelete(user)
-                                    .map(value -> ResponseEntity.status(HttpStatus.OK).body(true))
-                                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(false))
+                                    .map(value -> ResponseEntity.status(HttpStatus.OK).body(value))
+                                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()))
                 : userService.findByAccountAndPassword(user)
-                                    .map(value -> ResponseEntity.status(HttpStatus.OK).body(true))
-                                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(false));
+                                    .map(value -> ResponseEntity.status(HttpStatus.OK).body(value))
+                                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
     }
 
     @GetMapping("/{account}")
