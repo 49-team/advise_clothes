@@ -15,7 +15,7 @@ function HeaderLogin() {
                 <Navbar.Collapse id="basic-navbar-nav" className='collapse navbar-collapse justify-content-end'>
                     <Nav className="ml-auto">
                         <Nav.Link as={Link} to="/" className='px-3'>Home</Nav.Link>
-                        <Nav.Link as={Link} to="/mypage" className='px-3' >{cookies.info.nickname}</Nav.Link>
+                        <Nav.Link as={Link} to="/mypage" className='px-3' >안녕!{cookies.info.nickname}</Nav.Link>
                         <Nav.Link as={Link} to="/community">Community</Nav.Link>
                         <button style={btn_out} onClick={()=> {
                             removeCookie('info');

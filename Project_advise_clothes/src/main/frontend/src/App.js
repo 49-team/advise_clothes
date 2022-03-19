@@ -54,7 +54,7 @@ function App() {
             </div>
 
             <div className='footer' fixed='bottom'>
-                <h6>으아아악</h6>
+                <h6>ⓒAdvise-Clothes</h6>
             </div>
         </div>
     );
