@@ -5,11 +5,6 @@ import org.junit.jupiter.api.Test;
 
 public class UserControllerTest extends ProjectAdviseClothesApplicationTests {
 
-//    @Test
-//    public ResponseEntity<User> user() {
-//        return ""
-//    }
-
     @Test
     public void note() {
         String hello = ("Hi" == null)? "hello": "world";

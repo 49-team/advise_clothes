@@ -13,7 +13,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final int NO_DELETE = 0;
-    private final String[] NOTCHANGE_PARAM = new String[] { "account", "password", "createdAt", "createdBy" };
 
     public List<User> findAll() {
         return userRepository.findAll();
