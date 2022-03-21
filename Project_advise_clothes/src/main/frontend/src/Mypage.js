@@ -4,6 +4,7 @@ import Login from "./Login";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
+import { useCookies } from "react-cookie";
 
 function Mypage(props) {
     let co = { fontSize: "20px" };
@@ -33,7 +34,11 @@ function Mypage(props) {
                                     const chan = {
                                         nickname : nickChange
                                     }
-                                    await axios.put(`http://localhost:8080/api/users/${cookies.info.account}`, chan);
+                                    const res = await axios.put(`http://localhost:8080/api/users/${cookies.info.account}`, chan);
+
+                                    if (res.status == 200) {
+                                        setCookies('info', res.data);
+                                    }
                                 }
                                 catch (e) {
                                     console.log(e);
