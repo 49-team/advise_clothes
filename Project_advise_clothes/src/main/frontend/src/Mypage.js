@@ -4,18 +4,38 @@ import Login from "./Login";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
-import { useCookies } from "react-cookie";
 
-function Mypage(props) {
+function Mypage() {
     let co = { fontSize: "20px" };
-    const [cookies, setCookies, removeCookie] = useCookies(['info'],['nickC']);
+    const [cookies, setCookies, removeCookie] = useCookies(['info']);
     let [change, setChange] = useState(false);
     let [nickChange, setNickChange] = useState('');
+    let [emailChange, setEmailChange] = useState('');
+    let [phoneChange, setPhoneChange] = useState('');
     let [btn, setBtn] = useState(true);
+
+    const [phoneError, setPhoneError] = useState(false);
+
+    const URL = `/api/users/${cookies.info.account}`;
 
     const onNickChangeHandler = (e) => {
         setNickChange(e.target.value);
     }
+    const onEmailChangeHandler = (e) => {
+        setEmailChange(e.target.value);
+    }
+    const onPhoneChangeHandler = (e) => {
+        const phone = /^[0-9\b -]{0,13}$/;
+        if(phone.test(e.target.value)) {
+        setPhoneError(e.target.value.length < 11);
+        setPhoneChange(e.target.value);
+    }
+}
+    useEffect(()=> {
+        if (phoneChange.length === 11) {
+        setPhoneChange(phoneChange.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+        }
+    },[phoneChange]);
 
     return(
         <div className='mypage'>
@@ -24,19 +44,38 @@ function Mypage(props) {
                 아이디 : {cookies.info.account}
 
                 {/* 닉네임 변경 */}
-                <p>닉네임 : {cookies.info.nickname}
-                    {change? <div>
-                        <input name="nick" type="text" value={nickChange} onChange={onNickChangeHandler} placeholder="변경하실 닉네임을 입력해주세요"/>
+                <p>닉네임 : {cookies.info.nickname}</p>
 
-                        <button onClick={()=> {
+                <p>email : {cookies.info.email}</p>
+
+                <p>전화번호 : {cookies.info.phoneNumber}</p>
+
+                {btn? <button onClick={()=>{
+                        setChange(!change);
+
+                    }}>정보 변경</button>: null}
+
+                {change? <div>
+                        <input name="nick" type="text" value={nickChange} onChange={onNickChangeHandler} placeholder="변경하실 닉네임을 입력해주세요"/>
+                        <p/><input name="email" type="email" value={emailChange} onChange={onEmailChangeHandler} placeholder="변경하실 이메일을 입력해주세요"/>
+
+                        <p/><input name="phone" type="text" value={phoneChange} onChange={onPhoneChangeHandler} placeholder="변경하실 전화번호를 입력해주세요"/>
+                        {phoneError && <div style={{color : 'red'}}>정확한 전화번호를 입력해주세요!!</div>}
+                        
+
+                        <p/><button onClick={()=> {
+                           
                             const fetch = async() => {
                                 try {
+                                    
                                     const chan = {
-                                        nickname : nickChange
+                                        nickname : (!nickChange)? cookies.info.nickname : nickChange,
+                                        email : (!emailChange)? cookies.info.email : emailChange,
+                                        phoneNumber : (!phoneChange)? cookies.info.phoneNumber : phoneChange
                                     }
-                                    const res = await axios.put(`http://localhost:8080/api/users/${cookies.info.account}`, chan);
+                                    const res = await axios.put(URL, chan);
 
-                                    if (res.status == 200) {
+                                    if (res.status === 200) {
                                         setCookies('info', res.data);
                                     }
                                 }
@@ -47,15 +86,6 @@ function Mypage(props) {
                             fetch()
                             setChange(null);
                         }}>저장</button></div> : null}
-
-                    {btn? <button onClick={()=>{
-                        setChange(!nickChange);
-
-                    }}>닉네임 변경</button>: null}</p>
-
-                <p>email : {cookies.info.email} <button>이메일 변경</button></p>
-
-                <p>전화번호 : {cookies.info.phoneNumber} <button>전화번호 변경</button></p>
 
             </div>
         </div>

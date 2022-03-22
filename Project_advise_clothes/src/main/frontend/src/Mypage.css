@@ -11,5 +11,9 @@
 .info {
   width: 50vw;
   height: 30vh;
-  margin: 80px auto;
+  margin: 40px auto;
+}
+
+input {
+  width: 300px;
 }
