@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByPhoneNumberAndDeletedReason(String phoneNumber, int deletedReason);
     Optional<User> findByEmailAndDeletedReason(String email, int deletedReason);
     Optional<User> findByAccountAndPasswordAndDeletedReason(String account, String password, int deletedReason);
+    Optional<User> findByPhoneNumberAndPasswordAndDeletedReason(String phoneNumber, String password, int deletedReason);
+    Optional<User> findByEmailAndPasswordAndDeletedReason(String email, String password, int deletedReason);
 }

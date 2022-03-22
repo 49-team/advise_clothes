@@ -39,6 +39,5 @@ public class User extends AuditingEntity {
     public LocalDateTime updatedAt;
     @LastModifiedBy
     public String updatedBy;
-    public LocalDateTime deletedAt;
     public Integer deletedReason;
 }
