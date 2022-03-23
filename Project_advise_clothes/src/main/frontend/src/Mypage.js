@@ -12,7 +12,11 @@ function Mypage() {
     let [nickChange, setNickChange] = useState('');
     let [emailChange, setEmailChange] = useState('');
     let [phoneChange, setPhoneChange] = useState('');
-    let [btn, setBtn] = useState(true);
+
+    let [btn, setBtn] = useState(false);
+    let [removeBtn, setRemoveBtn] = useState(false);
+    let [remove, setRemove] = useState(false);
+    let [removeInput, setRemoveInput] = useState('');
 
     const [phoneError, setPhoneError] = useState(false);
 
@@ -30,12 +34,17 @@ function Mypage() {
         setPhoneError(e.target.value.length < 11);
         setPhoneChange(e.target.value);
     }
-}
+    }
+
     useEffect(()=> {
         if (phoneChange.length === 11) {
         setPhoneChange(phoneChange.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
         }
     },[phoneChange]);
+    
+    const onRemoveInputHandler = (e) => {
+        setRemoveInput(e.target.value);
+    }
 
     return(
         <div className='mypage'>
@@ -43,17 +52,18 @@ function Mypage() {
             <div className="info">
                 아이디 : {cookies.info.account}
 
-                {/* 닉네임 변경 */}
+                {/* 정보 변경 */}
                 <p>닉네임 : {cookies.info.nickname}</p>
 
                 <p>email : {cookies.info.email}</p>
 
                 <p>전화번호 : {cookies.info.phoneNumber}</p>
 
-                {btn? <button onClick={()=>{
+                {btn? null : <button onClick={()=>{
                         setChange(!change);
+                        setBtn(!btn)
 
-                    }}>정보 변경</button>: null}
+                    }}>정보 변경</button>}
 
                 {change? <div>
                         <input name="nick" type="text" value={nickChange} onChange={onNickChangeHandler} placeholder="변경하실 닉네임을 입력해주세요"/>
@@ -64,6 +74,7 @@ function Mypage() {
                         
 
                         <p/><button onClick={()=> {
+                            setBtn(!btn)
                            
                             const fetch = async() => {
                                 try {
@@ -86,7 +97,16 @@ function Mypage() {
                             fetch()
                             setChange(null);
                         }}>저장</button></div> : null}
+                    <p/>
 
+                    {/* 탈퇴 */}
+                        {removeBtn ? null : <button className="remove" onClick={()=> {
+                            setRemove(!remove);
+                        }}>⚠ 회원 탈퇴</button>}
+
+                        {remove ? <div><input name="remove" type="text" value={removeInput} onChange={onRemoveInputHandler} placeholder="아이디를 동일하게 입력해주세요!" />
+                        <button onClick={() => {
+                        }}>탈퇴하기</button></div>: null}
             </div>
         </div>
     )
