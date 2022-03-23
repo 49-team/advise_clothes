@@ -19,6 +19,7 @@ function Mypage() {
     let [removeInput, setRemoveInput] = useState('');
 
     const [phoneError, setPhoneError] = useState(false);
+    const [removeInputError, setRemoveInputError] = useState(false);
 
     const URL = `/api/users/${cookies.info.account}`;
 
@@ -31,17 +32,17 @@ function Mypage() {
     const onPhoneChangeHandler = (e) => {
         const phone = /^[0-9\b -]{0,13}$/;
         if(phone.test(e.target.value)) {
-        setPhoneError(e.target.value.length < 11);
-        setPhoneChange(e.target.value);
-    }
+            setPhoneError(e.target.value.length < 11);
+            setPhoneChange(e.target.value);
+        }
     }
 
     useEffect(()=> {
         if (phoneChange.length === 11) {
-        setPhoneChange(phoneChange.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+            setPhoneChange(phoneChange.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
         }
     },[phoneChange]);
-    
+
     const onRemoveInputHandler = (e) => {
         setRemoveInput(e.target.value);
     }
@@ -60,53 +61,72 @@ function Mypage() {
                 <p>전화번호 : {cookies.info.phoneNumber}</p>
 
                 {btn? null : <button onClick={()=>{
-                        setChange(!change);
-                        setBtn(!btn)
+                    setChange(!change);
+                    setBtn(!btn)
 
-                    }}>정보 변경</button>}
+                }}>정보 변경</button>}
 
                 {change? <div>
-                        <input name="nick" type="text" value={nickChange} onChange={onNickChangeHandler} placeholder="변경하실 닉네임을 입력해주세요"/>
-                        <p/><input name="email" type="email" value={emailChange} onChange={onEmailChangeHandler} placeholder="변경하실 이메일을 입력해주세요"/>
+                    <input name="nick" type="text" value={nickChange} onChange={onNickChangeHandler} placeholder="변경하실 닉네임을 입력해주세요"/>
+                    <p/><input name="email" type="email" value={emailChange} onChange={onEmailChangeHandler} placeholder="변경하실 이메일을 입력해주세요"/>
 
-                        <p/><input name="phone" type="text" value={phoneChange} onChange={onPhoneChangeHandler} placeholder="변경하실 전화번호를 입력해주세요"/>
-                        {phoneError && <div style={{color : 'red'}}>정확한 전화번호를 입력해주세요!!</div>}
-                        
+                    <p/><input name="phone" type="text" value={phoneChange} onChange={onPhoneChangeHandler} placeholder="변경하실 전화번호를 입력해주세요"/>
+                    {phoneError && <div style={{color : 'red'}}>정확한 전화번호를 입력해주세요!!</div>}
 
-                        <p/><button onClick={()=> {
-                            setBtn(!btn)
-                           
-                            const fetch = async() => {
-                                try {
-                                    
-                                    const chan = {
-                                        nickname : (!nickChange)? cookies.info.nickname : nickChange,
-                                        email : (!emailChange)? cookies.info.email : emailChange,
-                                        phoneNumber : (!phoneChange)? cookies.info.phoneNumber : phoneChange
-                                    }
-                                    const res = await axios.put(URL, chan);
 
-                                    if (res.status === 200) {
-                                        setCookies('info', res.data);
-                                    }
-                                }
-                                catch (e) {
-                                    console.log(e);
-                                }
+                    <p/><button onClick={()=> {
+                    setBtn(!btn)
+
+                    const fetch = async() => {
+                        try {
+
+                            const chan = {
+                                nickname : (!nickChange)? cookies.info.nickname : nickChange,
+                                email : (!emailChange)? cookies.info.email : emailChange,
+                                phoneNumber : (!phoneChange)? cookies.info.phoneNumber : phoneChange
                             }
-                            fetch()
-                            setChange(null);
-                        }}>저장</button></div> : null}
-                    <p/>
+                            const res = await axios.put(URL, chan);
 
-                    {/* 탈퇴 */}
-                        {removeBtn ? null : <button className="remove" onClick={()=> {
-                            setRemove(!remove);
-                        }}>⚠ 회원 탈퇴</button>}
+                            if (res.status === 200) {
+                                setCookies('info', res.data);
+                            }
+                        }
+                        catch (e) {
+                            console.log(e);
+                        }
+                    }
+                    fetch()
+                    setChange(null);
+                }}>저장</button></div> : null}
+                <p/>
 
-                        {remove ? <div><input name="remove" type="text" value={removeInput} onChange={onRemoveInputHandler} placeholder="아이디를 동일하게 입력해주세요!" />
-                        <button onClick={() => {
-                        }}>탈퇴하기</button></div>: null}
+                {/* 탈퇴 */}
+                {removeBtn ? null : <button className="remove" onClick={()=> {
+                    setRemove(!remove);
+                }}>⚠ 회원 탈퇴</button>}
+
+                {remove ? <div><input name="remove" type="text" value={removeInput} onChange={onRemoveInputHandler} placeholder="아이디를 동일하게 입력해주세요!" />
+
+                    <button onClick={() => {
+                        const fetch = async() => {
+                            try {
+                                if(cookies.info.account !== removeInput) {
+                                    return setRemoveInputError(true);
+                                }
+                                await axios.delete(URL);
+
+                                window.location.replace("/");
+                                removeCookie('info');
+
+                            } catch(e){
+                                console.log(e);
+                            }
+                        }
+                        fetch();
+
+
+                    }}>탈퇴하기</button></div>: null}
+                {removeInputError && <div style={{color : 'red'}}>아이디가 동일하지 않습니다!</div>}
             </div>
         </div>
     )
