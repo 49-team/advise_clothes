@@ -55,6 +55,19 @@ public class UserService {
     }
 
     /**
+     * 데이터 중복 체크
+     * @param user 'account' or 'phoneNumber' or 'email' or 'nickname' 중 하나가 들어있는 User
+     * @return 검색 결과
+     */
+    public Optional<User> findByUser(User user) {
+        return user.getAccount() != null ? userRepository.findByAccount(user.getAccount()) :
+                user.getPhoneNumber() != null ? userRepository.findByPhoneNumber(user.getPhoneNumber()) :
+                user.getEmail() != null ? userRepository.findByEmail(user.getEmail()) :
+                user.getNickname() != null ? userRepository.findByNickname(user.getNickname()) :
+                Optional.empty();
+    }
+
+    /**
      * 비밀번호 찾기
      * @param user 'account' or 'phoneNumber' or 'email' 중 하나가 들어있는 User
      * @param password 비밀번호(필수)

@@ -105,4 +105,12 @@ public class UserController {
         }).orElseGet(() ->
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
+
+    @DeleteMapping("{account}/reset")
+    public ResponseEntity<User> resetDeleteUser(@PathVariable String account) {
+        return userService.findByUser(User.builder().account(account).build()).map(value -> {
+            value.setDeletedReason(0);
+            return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+        }).orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
+    }
 }
