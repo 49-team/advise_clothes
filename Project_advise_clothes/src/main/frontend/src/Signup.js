@@ -29,7 +29,7 @@ function Signup() {
     let history = useHistory();
 
 
-    // onSubmit에 넘겨준 것만 실행되게 하기 위해서 preventDefault 사용
+    // form말고 submit만 실행되게 하기 위해(새로고침 없이) preventDefault 사용
     const onSubmit = (e) => {
         e.preventDefault();
         if(password.length < 8) {
@@ -45,15 +45,32 @@ function Signup() {
             return setIdError(true);
         }
 
-        console.log({
-            account,
-            password,
-            confirmPassword,
-            nick,
-            email,
-            phoneNumber,
-            // area
-        });
+        const fetch = async() => {
+            try {
+                const data = {
+                    account: account,
+                    password: password,
+                    nickname: nick,
+                    email: email,
+                    phoneNumber: phoneNumber
+                }
+
+                await axios.post('http://localhost:8080/api/users', data)
+            }
+            catch (e)
+            {}
+        }
+        fetch()
+
+        // console.log({
+        //     account,
+        //     password,
+        //     confirmPassword,
+        //     nick,
+        //     email,
+        //     phoneNumber,
+        //     // area
+        // });
         // Link가 아닌 replace를 사용하여 이전 페이지의 기록이 남지 않음!
         window.location.replace("/success")
     };
