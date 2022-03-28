@@ -96,7 +96,7 @@ public class UserController {
      * status 200 : 탈퇴 성공
      * status 400 : 탈퇴 실패 - 계정을 찾을 수 없음
      */
-    @DeleteMapping({"{account}"})
+    @DeleteMapping("{account}")
     public ResponseEntity<User> deleteUser(@PathVariable String account) {
         User userToFind = User.builder().account(account).build();
         return userService.findByUserForNotDelete(userToFind).map(value -> {

@@ -140,8 +140,7 @@ public class UserRepositoryTest extends ProjectAdviseClothesApplicationTests {
     }
 
     @Test
-    public void objectToMap() throws Exception {
-        // Optional.map을 쓰면 어떤 값이 나올까?
-
+    public void findByAccountTest() {
+        System.out.println(userRepository.findByAccount("young0105"));
     }
 }

@@ -58,4 +58,9 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
         user.setNickname("테스트계정100");
         System.out.println(userService.updateUser(user));
     }
+
+    @Test
+    public void findByUserTest() {
+        System.out.println(userService.findByUser(User.builder().account("young0105").build()));
+    }
 }
