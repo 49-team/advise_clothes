@@ -2,6 +2,7 @@ package com.advise_clothes.project_advise_clothes.service;
 
 import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.repository.UserRepository;
+import com.advise_clothes.project_advise_clothes.service.security.Encryption;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.*;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final Encryption encryption;
     private final int NO_DELETE = 0;
 
     public List<User> findAll() {
@@ -19,11 +21,12 @@ public class UserService {
     }
 
     /**
-     * 회원가입
+     * 회원가입`
      * @param user
      * @return
      */
     public User createUser(User user) {
+        user.setPassword(encryption.encode(user.getPassword()));
         user.setCreatedAt(null);
         user.setUpdatedAt(null);
         user.setCreatedBy(user.getAccount());
@@ -74,6 +77,8 @@ public class UserService {
      * @return 검색 결과
      */
     public Optional<User> findByUserForNotDelete(User user, String password) {
+        password = encryption.encode(password);
+
         return user.getAccount() != null ? userRepository.findByAccountAndPasswordAndDeletedReason(user.getAccount(), password, NO_DELETE) :
                 user.getPhoneNumber() != null ? userRepository.findByPhoneNumberAndPasswordAndDeletedReason(user.getPhoneNumber(), password, NO_DELETE) :
                 user.getEmail() != null ? userRepository.findByEmailAndPasswordAndDeletedReason(user.getEmail(), password, NO_DELETE) :
@@ -86,7 +91,10 @@ public class UserService {
      * @return
      */
     public User updateUser(User user) {
-        return userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE).map(userRepository::save).orElseGet(User::new);
+        return userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE).map(value -> {
+                value.setPassword(encryption.encode(user.getPassword()));
+                return userRepository.save(value);
+            }).orElseGet(User::new);
     }
 
     public User deleteUser(User user) {

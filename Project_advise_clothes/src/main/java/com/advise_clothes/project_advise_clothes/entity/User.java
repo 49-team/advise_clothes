@@ -9,35 +9,40 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Builder
-@ToString
+@ToString(exclude = {"sessionList"})
 public class User extends AuditingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String account;
-    public String password;
-    public String nickname;
-    public String email;
-    public String phoneNumber;
-    public Integer gender;
-    public String area;
-    public Integer height;
-    public Integer weight;
+    private Long id;
+    private String account;
+    private String password;
+    private String nickname;
+    private String email;
+    private String phoneNumber;
+    private Integer gender;
+    private String area;
+    private Integer height;
+    private Integer weight;
 
     @CreatedDate
-    public LocalDateTime createdAt;
+    private LocalDateTime createdAt;
     @CreatedBy
-    public String createdBy;
+    private String createdBy;
     @LastModifiedDate
-    public LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
     @LastModifiedBy
-    public String updatedBy;
-    public Integer deletedReason;
+    private String updatedBy;
+    private Integer deletedReason;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Session> sessionList = new ArrayList<>();
 }

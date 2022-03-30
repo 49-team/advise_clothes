@@ -34,7 +34,7 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
     @Test
     @Transactional
     public void createUserTest() {
-        int count = 999;
+        int count = 102;
         User newUser = User.builder()
                 .account("testAccount" + count)
                 .password("p" + count)
