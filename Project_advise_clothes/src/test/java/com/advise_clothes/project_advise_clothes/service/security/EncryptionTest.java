@@ -18,7 +18,7 @@ public class EncryptionTest extends ProjectAdviseClothesApplicationTests {
 
     @Test
     public void matchesTest() {
-        String str = "hello world";
+        String str = "1234";
         String encrypt = passwordEncoder.encode(str);
         Long miltime = System.currentTimeMillis();
 
@@ -26,6 +26,5 @@ public class EncryptionTest extends ProjectAdviseClothesApplicationTests {
         System.out.println(encrypt);
         System.out.println(miltime);
         System.out.println(passwordEncoder.matches(str, encrypt));
-        System.out.println(passwordEncoder.matches(str, "{bcrypt}$2a$10$EGyreZ/OihkOt1v/zswHluZ6n0N4qwzyCcdIA.jMWIhrB3Gd1drtS"));
     }
 }

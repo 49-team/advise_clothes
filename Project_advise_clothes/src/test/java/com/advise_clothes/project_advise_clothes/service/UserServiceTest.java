@@ -63,4 +63,9 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
     public void findByUserTest() {
         System.out.println(userService.findByUser(User.builder().account("young0105").build()));
     }
+
+    @Test
+    public void findByUserForNotDelete() {
+        System.out.println(userService.findByUserForNotDelete(User.builder().account("testAccount001").build(), "p001"));
+    }
 }

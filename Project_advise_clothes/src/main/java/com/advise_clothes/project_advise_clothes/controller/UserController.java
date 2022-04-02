@@ -1,6 +1,8 @@
 package com.advise_clothes.project_advise_clothes.controller;
 
+import com.advise_clothes.project_advise_clothes.entity.Session;
 import com.advise_clothes.project_advise_clothes.entity.User;
+import com.advise_clothes.project_advise_clothes.service.SessionService;
 import com.advise_clothes.project_advise_clothes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final SessionService sessionService;
 
     /**
      * 유저 조회
@@ -24,10 +27,10 @@ public class UserController {
      * status 204 : 조회 성공 - 유저 없음
      */
     @GetMapping("")
-    public ResponseEntity<User> getUser(@RequestParam(required = false) String account,
-                                           @RequestParam(required = false) String password,
-                                           @RequestParam(required = false) String email,
-                                           @RequestParam(required = false) String phoneNumber
+    public ResponseEntity<User> Login(@RequestParam(required = false) String account,
+                                      @RequestParam(required = false) String password,
+                                      @RequestParam(required = false) String email,
+                                      @RequestParam(required = false) String phoneNumber
                                         ) {
         User user = User.builder().account(account)
                 .password(password)
@@ -61,9 +64,12 @@ public class UserController {
      */
     @PostMapping("")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        return userService.findByUserForNotDelete(user).map(value -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(User.builder().account(value.getAccount()).build()))
-                .orElseGet(() -> (user.getAccount() != null || user.getPassword() != null || user.getNickname() != null || user.getEmail() != null || user.getPhoneNumber() != null )?
-                        ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user)) : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
+        return userService.findByUserForNotDelete(user).map(value ->
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(User.builder().account(value.getAccount()).build()))
+        .orElseGet(() ->
+            (user.getAccount() != null || user.getPassword() != null || user.getNickname() != null || user.getEmail() != null || user.getPhoneNumber() != null )?
+                ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user)) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
     /**

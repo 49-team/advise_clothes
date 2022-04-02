@@ -4,7 +4,9 @@ import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.entity.config.AuditingEntity;
 import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,7 +17,9 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @ToString
-public class Session extends AuditingEntity {
+@Accessors(chain = true)
+@EntityListeners(AuditingEntityListener.class)
+public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
