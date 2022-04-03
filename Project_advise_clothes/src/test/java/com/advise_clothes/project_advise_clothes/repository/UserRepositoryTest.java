@@ -2,6 +2,7 @@ package com.advise_clothes.project_advise_clothes.repository;
 
 import com.advise_clothes.project_advise_clothes.ProjectAdviseClothesApplicationTests;
 import com.advise_clothes.project_advise_clothes.entity.User;
+import com.advise_clothes.project_advise_clothes.service.security.Encryption;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,8 @@ public class UserRepositoryTest extends ProjectAdviseClothesApplicationTests {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private Encryption encryption;
 
     @Test
     @Transactional
@@ -28,6 +31,12 @@ public class UserRepositoryTest extends ProjectAdviseClothesApplicationTests {
     }
 
     @Test
+    public void findByIdTest() {
+        System.out.println(userRepository.findById(23L));
+    }
+
+    @Test
+    @Transactional
     public void create() {
         String count;
         List<User> userList = new ArrayList<>();
@@ -37,13 +46,13 @@ public class UserRepositoryTest extends ProjectAdviseClothesApplicationTests {
 
             User user = User.builder()
                             .account("testAccount" + count)
-                            .password("p" + count)
+                            .password(encryption.encode("p" + count))
                             .nickname("테스트계정" + count)
                             .email("test" + count + "@test.test")
                             .phoneNumber(count + "-0000-0000")
-                            .gender( (int) Math.round(Math.random()) +1 )
+                            .gender( (int) Math.round(Math.random()) + 1 )
                             .height( (int) Math.round(Math.random() * 25) + 160 )
-                            .weight( (int) Math.round(Math.random() * 60) + 45 )
+                            .weight( (int) Math.round(Math.random() * 60) + 35 )
                             .createdBy("system")
                             .deletedReason(0)
                             .build();
@@ -55,12 +64,10 @@ public class UserRepositoryTest extends ProjectAdviseClothesApplicationTests {
     }
 
     @Test
+    @Transactional
     public void delete() {
-        List<User> userList = userRepository.findAll();
-        for (User user : userList) {
-            userRepository.delete(user);
-            System.out.println(user.getAccount() + " 를 지웠습니다.");
-        }
+//        List<User> userList = userRepository.findAll();
+        userRepository.deleteAll();
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.advise_clothes.project_advise_clothes.entity;
 import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.entity.config.AuditingEntity;
 import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,6 +35,7 @@ public class Session {
     private LocalDateTime updatedAt;        // 필요한진 모르겠으나, AuditingEntity를 상속받아 구현해야 한다.
 
     @ManyToOne
+    @ToString.Exclude
     private User user;
 }
 

@@ -19,7 +19,7 @@ public class SessionController {
     private final UserService userService;
 
     @GetMapping("/{sessionKey}")
-    public ResponseEntity<Session> getSession(@RequestParam String sessionKey) {
+    public ResponseEntity<Session> getSession(@PathVariable String sessionKey) {
         Session sessionToFind = Session.builder().sessionKey(sessionKey).build();
 
         return sessionService.getSession(sessionToFind).map(value ->
@@ -30,12 +30,16 @@ public class SessionController {
 
     @PostMapping("")
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
-        User userToFind = User.builder().id(session.getUser().getId()).build();
+        return userService.findByUser(session.getUser()).map(user ->
+                ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(session))
+        ).orElseGet(() ->
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session())
+        );
 
-        return userService.findByUser(userToFind).map(value ->
-            ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(Session.builder().user(value).platform(session.getPlatform()).build())))
-        .orElseGet(() ->
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
+//        return userService.findByUser(userToFind).map(value ->
+//            ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(Session.builder().user(value).platform(session.getPlatform()).build())))
+//        .orElseGet(() ->
+//            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
     }
 
     @DeleteMapping("/{sessionKey}")

@@ -41,15 +41,23 @@ public class SessionService {
         // 1. 재로그인 경우 기존 세션 지우기(id and platform 동일)
         // 2. 동일한 sessionKey 있는지 검사
         try {
-            return userRepository.findById(session.getUser().getId()).map(user ->
-                sessionRepository.findByUserAndPlatform(user, session.getPlatform()).map(value -> {
-                    value.setSessionKey(createdSessionKey(value));
-                    return sessionRepository.save(value);
-                }).orElseGet(() -> {
-                    session.setSessionKey(createdSessionKey(session));
-                    return sessionRepository.save(session);
-                })
-            ).orElseGet(() -> Session.builder().id(-1L).build());
+            return sessionRepository.findByUserAndPlatform(session.getUser(), session.getPlatform()).map(value -> {
+                value.setSessionKey(createdSessionKey(value));
+                return sessionRepository.save(value);
+            }).orElseGet(() -> {
+                session.setSessionKey(createdSessionKey(session));
+                return sessionRepository.save(session);
+            });
+
+//            return userRepository.findById(session.getUser().getId()).map(user ->
+//                sessionRepository.findByUserAndPlatform(user, session.getPlatform()).map(value -> {
+//                    value.setSessionKey(createdSessionKey(value));
+//                    return sessionRepository.save(value);
+//                }).orElseGet(() -> {
+//                    session.setSessionKey(createdSessionKey(session));
+//                    return sessionRepository.save(session);
+//                })
+//            ).orElseGet(() -> Session.builder().user(User.builder().id(-1L).build()).build());
 
         // DB에 2개 이상의 User and platform이 검색됐을 경우
         } catch (IncorrectResultSizeDataAccessException e) {

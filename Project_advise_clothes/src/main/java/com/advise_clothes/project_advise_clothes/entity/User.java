@@ -1,8 +1,10 @@
 package com.advise_clothes.project_advise_clothes.entity;
 
-import com.advise_clothes.project_advise_clothes.entity.config.AuditingEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,13 +15,14 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Builder
-@ToString(exclude = {"sessionList"})
+@ToString
 @Accessors(chain = true)
 @EntityListeners(AuditingEntityListener.class)
 public class User {
@@ -48,5 +51,21 @@ public class User {
     private Integer deletedReason;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @ToString.Exclude
+//    @JsonBackReference
+    @JsonIgnore
     private List<Session> sessionList = new ArrayList<>();
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+//        User user = (User) o;
+//        return id != null && Objects.equals(id, user.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return this.id.hashCode();
+//    }
 }
