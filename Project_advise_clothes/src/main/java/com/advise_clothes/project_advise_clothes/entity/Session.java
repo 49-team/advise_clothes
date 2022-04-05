@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -32,7 +33,8 @@ public class Session {
 
     @CreatedDate
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;        // 필요한진 모르겠으나, AuditingEntity를 상속받아 구현해야 한다.
+    @LastModifiedDate
+    private LocalDateTime updatedAt;        // 필요할..까..?
 
     @ManyToOne
     @ToString.Exclude

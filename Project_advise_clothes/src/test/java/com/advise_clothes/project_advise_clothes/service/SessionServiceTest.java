@@ -18,7 +18,7 @@ public class SessionServiceTest extends ProjectAdviseClothesApplicationTests {
 
     @Test
     public void createdSessionTest() {
-        Session session = Session.builder().user(User.builder().id(23L).build()).platform(SessionType.BROWSER).build();
+        Session session = Session.builder().user(User.builder().id(24L).build()).platform(SessionType.BROWSER).build();
         sessionService.createSession(session);
     }
 

@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.NonUniqueResultException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -42,10 +40,10 @@ public class SessionService {
         // 2. 동일한 sessionKey 있는지 검사
         try {
             return sessionRepository.findByUserAndPlatform(session.getUser(), session.getPlatform()).map(value -> {
-                value.setSessionKey(createdSessionKey(value));
+                value.setSessionKey(createSessionKey(value));
                 return sessionRepository.save(value);
             }).orElseGet(() -> {
-                session.setSessionKey(createdSessionKey(session));
+                session.setSessionKey(createSessionKey(session));
                 return sessionRepository.save(session);
             });
 
@@ -62,7 +60,7 @@ public class SessionService {
         // DB에 2개 이상의 User and platform이 검색됐을 경우
         } catch (IncorrectResultSizeDataAccessException e) {
             sessionRepository.deleteAll(sessionRepository.findAllByUser(session.getUser()));
-            session.setSessionKey(createdSessionKey(session));
+            session.setSessionKey(createSessionKey(session));
             return sessionRepository.save(session);
         }
 
@@ -76,7 +74,9 @@ public class SessionService {
         }).orElseGet(Session::new);
     }
 
-    private String createdSessionKey(Session session) {
-        return encryption.encode(Long.toString(System.currentTimeMillis()) + session.getUser().getId());
+    private String createSessionKey(Session session) {
+        String sessionValue = Long.toString(System.currentTimeMillis()) + session.getUser().getId();
+        String encodeSessionKey = encryption.encode(sessionValue);
+        return encodeSessionKey.contains("/")? createSessionKey(session) : encodeSessionKey;
     }
 }
