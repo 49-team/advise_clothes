@@ -1,17 +1,18 @@
 import { Nav, Navbar, Container, NavDropdown, Card } from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Login from './Login';
-import Signup from './Signup';
+import Login from './Login/Login';
+import Signup from './Login/Signup';
 import Community from './Community';
 import Weather from './Weather';
 import Recommend from './Recommend';
-import Success from './Success';
+import Success from './Login/Success';
 import NotFound from './NotFound';
 import Header from './Header';
 import HeaderLogin from './HeaderLogin';
-import Mypage from './Mypage';
-import PrivateRoute from './PrivateRoute';
+import Mypage from './Login/Mypage';
+import PrivateRoute from './Login/PrivateRoute';
+import PublicRoute from './Login/PublicRoute';
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 
@@ -37,19 +38,21 @@ function App() {
                         <Recommend/>
                     </Route>
 
-                    <Route path="/login" component={Login}/>
+                    <PublicRoute path="/login" component={Login}/>
 
-                    <Route path="/signUp" component={Signup}/>
+                    <PublicRoute path="/signUp" component={Signup}/>
 
-                    <Route path="/success" component={Success}/>
+                    <PublicRoute path="/success" component={Success}/>
 
                     <Route path="/community" component={Community}/>
 
-                    <Route path="/mypage" component={Mypage}/>
+                    <PrivateRoute path="/mypage" component={Mypage}/>
 
                     <Route path="*" component={NotFound}/>
 
                 </Switch>
+
+                {/* <PrivateRoute path="/success" component={Success}/> */}
 
             </div>
 

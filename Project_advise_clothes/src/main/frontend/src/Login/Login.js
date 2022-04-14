@@ -32,7 +32,7 @@ function Login() {
                 }
 
                 setCookies('info', res.data);
-                // window.localStorage.setItem("account", JSON.stringify(res.data));
+                window.localStorage.setItem("account", JSON.stringify(res.data));
 
                 return window.location.replace("/");
             } catch (e) //호출 실패시

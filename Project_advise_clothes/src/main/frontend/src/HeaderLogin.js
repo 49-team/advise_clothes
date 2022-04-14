@@ -19,6 +19,7 @@ function HeaderLogin() {
                         <Nav.Link as={Link} to="/community">Community</Nav.Link>
                         <button style={btn_out} onClick={()=> {
                             removeCookie('info');
+                            localStorage.removeItem("account");
                             return window.location.replace("/");
                         }}>로그아웃</button>
                     </Nav>

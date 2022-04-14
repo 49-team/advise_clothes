@@ -116,6 +116,7 @@ function Mypage() {
                                 await axios.delete(URL);
 
                                 window.location.replace("/");
+                                localStorage.clear();
                                 removeCookie('info');
 
                             } catch(e){
