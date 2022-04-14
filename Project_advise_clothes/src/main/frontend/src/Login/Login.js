@@ -49,7 +49,7 @@ function Login() {
 
                 setCookies('info', resUser.data);
                 setCookies('auth', resSession.data.sessionKey);
-                // window.localStorage.setItem("account", JSON.stringify(resUser.data));
+                window.localStorage.setItem("account", JSON.stringify(resUser.data));
 
                 return window.location.replace("/");
             } catch (e) //호출 실패시
