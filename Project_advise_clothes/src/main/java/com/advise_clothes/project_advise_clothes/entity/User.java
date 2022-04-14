@@ -1,14 +1,21 @@
 package com.advise_clothes.project_advise_clothes.entity;
 
-import com.advise_clothes.project_advise_clothes.entity.config.AuditingEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.Accessors;
+import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,28 +23,49 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @ToString
-public class User extends AuditingEntity {
+@Accessors(chain = true)
+@EntityListeners(AuditingEntityListener.class)
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String account;
-    public String password;
-    public String nickname;
-    public String email;
-    public String phoneNumber;
-    public Integer gender;
-    public String area;
-    public Integer height;
-    public Integer weight;
+    private Long id;
+    private String account;
+    private String password;
+    private String nickname;
+    private String email;
+    private String phoneNumber;
+    private Integer gender;
+    private String area;
+    private Integer height;
+    private Integer weight;
 
     @CreatedDate
-    public LocalDateTime createdAt;
+    private LocalDateTime createdAt;
     @CreatedBy
-    public String createdBy;
+    private String createdBy;
     @LastModifiedDate
-    public LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
     @LastModifiedBy
-    public String updatedBy;
-    public Integer deletedReason;
+    private String updatedBy;
+    private Integer deletedReason;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @ToString.Exclude
+//    @JsonBackReference
+    @JsonIgnore
+    private List<Session> sessionList = new ArrayList<>();
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+//        User user = (User) o;
+//        return id != null && Objects.equals(id, user.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return this.id.hashCode();
+//    }
 }

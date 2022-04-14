@@ -18,12 +18,12 @@ public class EntityToolsTest extends ProjectAdviseClothesApplicationTests {
     @Test
     public void toMapTest() throws Exception {
         User user = userRepository.findById(1L).orElse(new User());
-        System.out.println(EntityTools.toMap(user));
+//        System.out.println(EntityTools.toMap(user));
     }
 
     @Test
     public void isParamsTest() throws Exception {
         User user = userRepository.findById(1L).orElse(new User());
-        System.out.println(EntityTools.isParams(user, new String[]{"account"}));
+//        System.out.println(EntityTools.isParams(user, new String[]{"account"}));
     }
 }

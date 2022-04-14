@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 
 
 function Login() {
-    const [cookies, setCookies, removeCookie] = useCookies(['info']);
+    const [cookies, setCookies, removeCookie] = useCookies(['info', 'auth']);
 
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
@@ -17,22 +17,36 @@ function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        const HOSTNAME = 'localhost:8080';
+        const PROTOCOL = 'http'
 
         const fetch = async() => {
             try {
 
-                const res = await axios.get(
-                    `http://localhost:8080/api/users?account=${account}&password=${password}`);
-                // setConfirmAccount(res.data.account);
-                // setConfirmPasswords(res.data.password);
-                setInfo(res.data);
+                const resUser = await axios.get(
+                    `${PROTOCOL}://${HOSTNAME}/api/users?account=${account}&password=${password}`);
+                // setConfirmAccount(resUser.data.account);
+                // setConfirmPasswords(resUser.data.password);
+                setInfo(resUser.data);
 
-                if (!res.data.account) {
+                if (!resUser.data.account) {
                     return setAccountError(true);
                 }
 
-                setCookies('info', res.data);
-                window.localStorage.setItem("account", JSON.stringify(res.data));
+                const reqSessionBody = {
+                    "platform" : "BROWSER",
+                    "user" : {
+                        "id" : resUser.data.id
+                    }
+                }
+
+                const resSession = await axios.post(
+                    `${PROTOCOL}://${HOSTNAME}/api/session`, reqSessionBody
+                )
+
+                setCookies('info', resUser.data);
+                setCookies('auth', resSession.data.sessionKey);
+                // window.localStorage.setItem("account", JSON.stringify(resUser.data));
 
                 return window.location.replace("/");
             } catch (e) //호출 실패시
