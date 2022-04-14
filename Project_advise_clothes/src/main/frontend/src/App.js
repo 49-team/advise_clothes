@@ -1,7 +1,7 @@
 import { Nav, Navbar, Container, NavDropdown, Card } from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Login from './Login';
+import Login from "./Login/Login";
 import Signup from './Login/Signup';
 import Community from './Community';
 import Weather from './Weather';
