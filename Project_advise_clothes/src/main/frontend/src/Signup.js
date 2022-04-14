@@ -55,7 +55,8 @@ function Signup() {
                     phoneNumber: phoneNumber
                 }
 
-                await axios.post('http://localhost:8080/api/users', data)
+                // await axios.post('http://localhost:8080/api/users', data)
+                await axios.post('/api/users', data)
             }
             catch (e)
             {}

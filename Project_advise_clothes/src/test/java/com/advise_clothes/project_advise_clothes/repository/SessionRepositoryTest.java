@@ -4,6 +4,9 @@ import com.advise_clothes.project_advise_clothes.ProjectAdviseClothesApplication
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 public class SessionRepositoryTest extends ProjectAdviseClothesApplicationTests {
 
     @Autowired
@@ -11,6 +14,7 @@ public class SessionRepositoryTest extends ProjectAdviseClothesApplicationTests 
 
     @Test
     public void findBySessionKeyTest() {
-        System.out.println(sessionRepository.findBySessionKey("{bcrypt}$2a$10$UEJpuw/CNKpyW11P209R6eVn5KnoRfWfmAkQ74Q3QiqYKfFylR8CO"));
+        String session = URLDecoder.decode("%7Bbcrypt%7D%242a%2410%24aR3ysioH2qOYupQcsmVKw.TEinA9J29Ig8etuMXUZiihykkJ3AH.6" , StandardCharsets.UTF_8);
+        System.out.println(sessionRepository.findBySessionKey(session));
     }
 }
