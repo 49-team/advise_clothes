@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Mypage.css';
-import Login from "./Login";
+import Login from "../Login";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
