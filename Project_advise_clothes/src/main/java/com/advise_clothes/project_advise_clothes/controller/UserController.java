@@ -67,7 +67,7 @@ public class UserController {
         return userService.findByUserForNotDelete(user).map(value ->
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(User.builder().account(value.getAccount()).build()))
         .orElseGet(() ->
-            (user.getAccount() != null || user.getPassword() != null || user.getNickname() != null || user.getEmail() != null || user.getPhoneNumber() != null )?
+            (user.getAccount() != null && user.getPassword() != null && user.getNickname() != null && user.getEmail() != null && user.getPhoneNumber() != null )?
                 ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user)) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
