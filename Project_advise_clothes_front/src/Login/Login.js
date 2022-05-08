@@ -16,7 +16,6 @@ function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // const HOSTNAME = 'localhost:8080';
         const HOSTNAME = window.location.hostname + ":8080";
         const PROTOCOL = 'http'
 
