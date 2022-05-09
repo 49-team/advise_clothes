@@ -65,8 +65,9 @@ public class UserService {
      * @author 임리을
      */
     public Optional<User> findByUserForNotDelete(User user) {
-        user.setNickname(null);     // nickName으론 검색 X
-        return findByUser(user).filter(value -> value.getDeletedReason() == NO_DELETE);
+        // nickname으론 검색 x
+        User userToFind = User.builder().id(user.getId()).account(user.getAccount()).phoneNumber(user.getPhoneNumber()).email(user.getEmail()).build();
+        return findByUser(userToFind).filter(value -> value.getDeletedReason() == NO_DELETE);
 
         // 위에 코드가 잘 작동하면 삭제
 //        return user.getId() != null ? userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE) :

@@ -4,7 +4,6 @@ import './Login.scss';
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
-
 function Login() {
     const [cookies, setCookies, removeCookie] = useCookies(['info', 'auth']);
 
@@ -17,16 +16,15 @@ function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // const HOSTNAME = 'localhost:8080';
-        const HOSTNAME = '52.79.195.60:8080';
+        const HOSTNAME = window.location.hostname + ":8080";
         const PROTOCOL = 'http'
 
         const fetch = async() => {
             try {
 
                 const resUser = await axios.get(
-                    // `${PROTOCOL}://${HOSTNAME}/api/users?account=${account}&password=${password}`);
-                    `/api/users?account=${account}&password=${password}`);
+                    `${PROTOCOL}://${HOSTNAME}/api/users?account=${account}&password=${password}`);
+                    // `/api/users?account=${account}&password=${password}`);
                 // setConfirmAccount(resUser.data.account);
                 // setConfirmPasswords(resUser.data.password);
                 setInfo(resUser.data);
@@ -43,8 +41,8 @@ function Login() {
                 }
 
                 const resSession = await axios.post(
-                    // `${PROTOCOL}://${HOSTNAME}/api/session`, reqSessionBody
-                    `/api/session`, reqSessionBody
+                    `${PROTOCOL}://${HOSTNAME}/api/session`, reqSessionBody
+                    // `/api/session`, reqSessionBody
                 )
 
                 setCookies('info', resUser.data);
