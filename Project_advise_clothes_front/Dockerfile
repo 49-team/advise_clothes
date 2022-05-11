@@ -1,8 +1,37 @@
-FROM node:16.14.2-alpine
+FROM node:16.13.2-alpine
 
+## front + back일 때 사용 ======
+# RUN npm install -g serve
+
+# RUN mkdir ./build
+# COPY ./build ./build
+
+# ENTRYPOINT ["serve", "-s", "build"]
+
+# pull official base image
+## ===========================
+
+# set working directory
+WORKDIR /app
+
+# Copies package.json and package-lock.json to Docker environment
+COPY package*.json ./
+
+# Installs all node packages
+RUN npm install
+
+# Copies everything over to Docker environment
+COPY . .
+
+# Build for production.
+RUN npm run build --production
+
+# Install `serve` to run the application.
 RUN npm install -g serve
 
-RUN mkdir ./build
-COPY ./build ./build
+# Uses port which is used by the actual application
+EXPOSE 3000
 
-ENTRYPOINT ["serve", "-s", "build"]
+# Run application
+#CMD [ "npm", "start" ]
+CMD serve -s build

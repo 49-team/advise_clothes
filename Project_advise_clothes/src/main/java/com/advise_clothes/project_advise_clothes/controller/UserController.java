@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "http://52.79.195.60:3000")
+//@CrossOrigin(origins = {"http://52.79.195.60:80", "http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:80"} )
 public class UserController {
 
     private final UserService userService;

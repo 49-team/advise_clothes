@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/session")
+//@CrossOrigin(origins = {"http://52.79.195.60:80", "http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:80"})
 public class SessionController {
 
     private final SessionService sessionService;
