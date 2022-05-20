@@ -18,16 +18,23 @@ public class SessionService {
     private final UserRepository userRepository;
     private final Encryption encryption;
 
+    /**
+     * sesstionKey를 통해 session 정보 가져오기
+     * @param session
+     * @return
+     */
     public Optional<Session> getSession(Session session) {
         return (session.getSessionKey() != null)? sessionRepository.findBySessionKey(session.getSessionKey()) :
-                sessionRepository.findByUserAndPlatform(session.getUser(), session.getPlatform());
+                Optional.empty();
     }
 
+    /**
+     * 세션이 존재하는지 확인
+     * @param session
+     * @return
+     */
     public boolean isExist(Session session) {
-        return sessionRepository.findBySessionKey(session.getSessionKey()).map(value -> true)
-                .orElseGet(() ->
-                    sessionRepository.findByUserAndPlatform(User.builder().id(session.getId()).build(), session.getPlatform()).isPresent()
-                );
+        return sessionRepository.findBySessionKey(session.getSessionKey()).isPresent();
     }
 
     /**
@@ -66,6 +73,12 @@ public class SessionService {
 
     }
 
+    private String createSessionKey(Session session) {
+        String sessionValue = Long.toString(System.currentTimeMillis()) + session.getUser().getId();
+        String encodeSessionKey = encryption.encode(sessionValue);
+        return encodeSessionKey.contains("/")? createSessionKey(session) : encodeSessionKey;
+    }
+
     public Session deleteSession(Session session) {
         return sessionRepository.findBySessionKey(session.getSessionKey()).map(value -> {
             sessionRepository.delete(value);
@@ -74,9 +87,4 @@ public class SessionService {
         }).orElseGet(Session::new);
     }
 
-    private String createSessionKey(Session session) {
-        String sessionValue = Long.toString(System.currentTimeMillis()) + session.getUser().getId();
-        String encodeSessionKey = encryption.encode(sessionValue);
-        return encodeSessionKey.contains("/")? createSessionKey(session) : encodeSessionKey;
-    }
 }

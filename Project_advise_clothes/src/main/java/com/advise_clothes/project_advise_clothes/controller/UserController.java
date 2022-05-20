@@ -80,7 +80,7 @@ public class UserController {
      * @return
      * status 200 : 변경 완료
      */
-    @PutMapping("{account}")
+    @PutMapping("/{account}")
     public ResponseEntity<User> updateUser(@PathVariable String account, @RequestBody User user) {
         User userToFind = User.builder().account(account).build();
         return userService.findByUserForNotDelete(userToFind).map(value -> {
@@ -96,6 +96,24 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
     }
 
+    // 테스트 아직 안 해봄
+    @PutMapping("/{session}")
+    public ResponseEntity<User> updateUser(@PathVariable Session session) {
+        return sessionService.isExist(session)? userService.findByUserForNotDelete(session.getUser()).map(value -> {
+            if (session.getUser().getPassword() != null) { value.setPassword(session.getUser().getPassword()); }
+            if (session.getUser().getNickname() != null) { value.setNickname(session.getUser().getNickname()); }
+            if (session.getUser().getEmail() != null) { value.setEmail(session.getUser().getEmail()); }
+            if (session.getUser().getPhoneNumber() != null) { value.setPhoneNumber(session.getUser().getPhoneNumber()); }       // 이후 휴대폰 본인인증으로 변경
+            if (session.getUser().getArea() != null) { value.setArea(session.getUser().getArea()); }
+            if (session.getUser().getHeight() != null) { value.setHeight(session.getUser().getHeight()); }
+            if (session.getUser().getWeight() != null) { value.setWeight(session.getUser().getWeight()); }
+            return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+        })
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User())) :
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User());
+    }
+
+
     /**
      * 유저 탈퇴
      * @param account 탈퇴할 계정
@@ -103,7 +121,7 @@ public class UserController {
      * status 200 : 탈퇴 성공
      * status 400 : 탈퇴 실패 - 계정을 찾을 수 없음
      */
-    @DeleteMapping("{account}")
+    @DeleteMapping("/{account}")
     public ResponseEntity<User> deleteUser(@PathVariable String account) {
         User userToFind = User.builder().account(account).build();
         return userService.findByUserForNotDelete(userToFind).map(value -> {
@@ -113,7 +131,7 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
-    @DeleteMapping("{account}/reset")
+    @DeleteMapping("/{account}/reset")
     public ResponseEntity<User> resetDeleteUser(@PathVariable String account) {
         return userService.findByUser(User.builder().account(account).build()).map(value -> {
             value.setDeletedReason(0);

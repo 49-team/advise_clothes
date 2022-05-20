@@ -23,7 +23,7 @@ public class ProjectAdviseClothesApplication implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://52.79.195.60",
                         "http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com",
-                        "http://localhost:3001")
+                        "http://localhost:3000")
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
 
         // .allowedOrigins만 막 추가하다가 에러가 났다. 마지막 설정 값(localhost:3000였음)을 가져오나보다
