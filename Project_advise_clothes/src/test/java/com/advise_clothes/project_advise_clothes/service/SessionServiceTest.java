@@ -5,6 +5,7 @@ import com.advise_clothes.project_advise_clothes.entity.Session;
 import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
 import com.advise_clothes.project_advise_clothes.repository.SessionRepository;
+import com.advise_clothes.project_advise_clothes.service.implement.SessionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

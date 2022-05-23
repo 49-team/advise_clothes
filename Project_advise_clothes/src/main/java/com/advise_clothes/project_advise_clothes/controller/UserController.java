@@ -2,8 +2,8 @@ package com.advise_clothes.project_advise_clothes.controller;
 
 import com.advise_clothes.project_advise_clothes.entity.Session;
 import com.advise_clothes.project_advise_clothes.entity.User;
-import com.advise_clothes.project_advise_clothes.service.SessionService;
-import com.advise_clothes.project_advise_clothes.service.UserService;
+import com.advise_clothes.project_advise_clothes.service.implement.SessionService;
+import com.advise_clothes.project_advise_clothes.service.implement.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,6 +2,8 @@ package com.advise_clothes.project_advise_clothes.service;
 
 import com.advise_clothes.project_advise_clothes.ProjectAdviseClothesApplicationTests;
 import com.advise_clothes.project_advise_clothes.entity.User;
+import com.advise_clothes.project_advise_clothes.repository.UserRepository;
+import com.advise_clothes.project_advise_clothes.service.implement.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +13,10 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
+    private User user = userRepository.findById(1L).orElseThrow();
+
 
     @Test
     public void findAllTest() {
