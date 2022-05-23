@@ -15,16 +15,30 @@ public class SessionServiceTest extends ProjectAdviseClothesApplicationTests {
     @Autowired
     private SessionRepository sessionRepository;
 
+    private final Session sessionToFind = Session.builder().sessionKey("{bcrypt}$2a$10$N7K08RcrIg6UQnJnGfEJOOrd1AelyhH7UqqkcVNoCR6.KzZAumbIq").build();
+    private final Session sessionEmpty = Session.builder().sessionKey("hello advise_clothes").build();
+
+    @Test
+    public void getSessionTest() {
+        if (true) {
+            System.out.println("SessionServiceTest : 이 함수는 세션의 정보를 반환할 것입니다");
+            System.out.println("SessionServiceTest : " + sessionService.getSession(sessionToFind).toString());
+        }
+        else {
+            System.out.println("SessionServiceTest : 이 함수는 빈 Optional을 반환할 것입니다");
+            System.out.println("SessionServiceTest : " + sessionService.getSession(sessionToFind).toString());
+        }
+    }
+
     @Test
     public void isExistTest() {
-        Session sessionToFind = Session.builder().sessionKey("{bcrypt}$2a$10$N7K08RcrIg6UQnJnGfEJOOrd1AelyhH7UqqkcVNoCR6.KzZAumbIq").build();
         if (false) {
             System.out.println("SessionServiceTest : 이 함수는 true를 반환할 것입니다");
             System.out.println("SessionServiceTest : " + sessionService.isExist(sessionToFind));
         }
         else {
             System.out.println("SessionServiceTest : 이 함수는 false을 반환할 것입니다");
-            System.out.println("SessionServiceTest : " + sessionService.isExist(Session.builder().sessionKey("hello").build()));
+            System.out.println("SessionServiceTest : " + sessionService.isExist(sessionEmpty));
         }
 
 

@@ -110,7 +110,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
         })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User())) :
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User());
+                ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User());
     }
 
 
