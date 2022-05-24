@@ -1,6 +1,7 @@
 package com.advise_clothes.project_advise_clothes.repository;
 
 import com.advise_clothes.project_advise_clothes.ProjectAdviseClothesApplicationTests;
+import com.advise_clothes.project_advise_clothes.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,11 @@ public class SessionRepositoryTest extends ProjectAdviseClothesApplicationTests 
 
     @Autowired
     private SessionRepository sessionRepository;
+
+    @Test
+    public void findAllByUserTest() {
+        System.out.println(sessionRepository.findAllByUser(User.builder().id(1L).build()).isEmpty());
+    }
 
     @Test
     public void findBySessionKeyTest() {

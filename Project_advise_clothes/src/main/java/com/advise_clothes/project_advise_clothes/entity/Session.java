@@ -1,9 +1,7 @@
 package com.advise_clothes.project_advise_clothes.entity;
 
 import com.advise_clothes.project_advise_clothes.entity.User;
-import com.advise_clothes.project_advise_clothes.entity.config.AuditingEntity;
 import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,8 +31,6 @@ public class Session {
 
     @CreatedDate
     private LocalDateTime createdAt;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;        // 필요할..까..?
 
     @ManyToOne
     @ToString.Exclude

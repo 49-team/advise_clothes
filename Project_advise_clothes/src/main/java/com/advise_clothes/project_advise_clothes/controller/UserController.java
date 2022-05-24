@@ -99,7 +99,7 @@ public class UserController {
     // 테스트 아직 안 해봄
     @PutMapping("/{session}")
     public ResponseEntity<User> updateUser(@PathVariable Session session) {
-        return sessionService.isExist(session)? userService.findByUserForNotDelete(session.getUser()).map(value -> {
+        return sessionService.findBySessionKey(session).isPresent()? userService.findByUserForNotDelete(session.getUser()).map(value -> {
             if (session.getUser().getPassword() != null) { value.setPassword(session.getUser().getPassword()); }
             if (session.getUser().getNickname() != null) { value.setNickname(session.getUser().getNickname()); }
             if (session.getUser().getEmail() != null) { value.setEmail(session.getUser().getEmail()); }
@@ -131,6 +131,11 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
+    /**
+     * 임의로 만든 메서드. url로 간단하게 회원탈퇴를 복구할 수 있도록 했다.
+     * @param account
+     * @return
+     */
     @DeleteMapping("/{account}/reset")
     public ResponseEntity<User> resetDeleteUser(@PathVariable String account) {
         return userService.findByUser(User.builder().account(account).build()).map(value -> {

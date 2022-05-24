@@ -2,7 +2,7 @@ package com.advise_clothes.project_advise_clothes.service.implement;
 
 import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.repository.UserRepository;
-import com.advise_clothes.project_advise_clothes.service.interfaces.SessionServiceInterface;
+import com.advise_clothes.project_advise_clothes.service.interfaces.UserServiceInterface;
 import com.advise_clothes.project_advise_clothes.service.security.Encryption;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Service
-public class UserService implements SessionServiceInterface {
+public class UserService implements UserServiceInterface {
 
     private final UserRepository userRepository;
     private final Encryption encryption;
@@ -47,6 +47,7 @@ public class UserService implements SessionServiceInterface {
 
     /**
      * 데이터 중복 체크
+     * 이걸 public으로 하는 게 맞을까..?
      * @param user 'account' or 'phoneNumber' or 'email' or 'nickname' 중 하나가 들어있는 User
      * @return 검색 결과
      */
