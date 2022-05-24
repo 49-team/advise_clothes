@@ -26,7 +26,7 @@ public class SessionController {
                 .sessionKey(URLDecoder.decode(sessionKey, StandardCharsets.UTF_8))
                 .build();
 
-        return sessionService.getSession(sessionToFind).map(value ->
+        return sessionService.findBySessionKey(sessionToFind).map(value ->
             ResponseEntity.status(HttpStatus.OK).body(value))
         .orElseGet(() ->
             ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Session()));
@@ -40,10 +40,9 @@ public class SessionController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session())
         );
 
-//        return userService.findByUser(userToFind).map(value ->
-//            ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(Session.builder().user(value).platform(session.getPlatform()).build())))
-//        .orElseGet(() ->
-//            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
+//        return userService.findByUser(session.getUser()).map(user -> {
+//            sessionService.findBySessionKey(session).map()
+//        })
     }
 
     @DeleteMapping("/{sessionKey}")
@@ -52,7 +51,7 @@ public class SessionController {
                 .sessionKey(URLDecoder.decode(sessionKey, StandardCharsets.UTF_8))
                 .build();
 
-        return sessionService.getSession(sessionToDelete).map(value ->
+        return sessionService.findBySessionKey(sessionToDelete).map(value ->
             ResponseEntity.status(HttpStatus.OK).body(sessionService.deleteSession(value))
         ).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
     }
