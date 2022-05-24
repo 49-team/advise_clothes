@@ -7,12 +7,12 @@ import java.util.Optional;
 
 public interface SessionServiceInterface {
     public List<User> findAll();
-    public User createUser(User user);
     public Optional<User> findByAccountAndPassword(User user);
     public Optional<User> findByUser(User user);
     public Optional<User> findByUserForNotDelete(User user);
     public Optional<User> findByUserForNotDelete(User user, String password);
 
+    public User createUser(User user);
     public User updateUser(User user);
     public User deleteUser(User user);
 }
