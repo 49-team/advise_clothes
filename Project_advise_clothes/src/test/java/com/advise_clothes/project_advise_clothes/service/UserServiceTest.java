@@ -39,7 +39,7 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
 
     @Test
     @Transactional
-    public void createUserTest() {
+    public void createTest() {
         int count = 102;
         User newUser = User.builder()
                 .account("testAccount" + count)
@@ -54,15 +54,15 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
                 .deletedReason(0)
                 .build();
 
-        System.out.println(userService.createUser(newUser));
+        System.out.println(userService.create(newUser));
     }
 
     @Test
-    public void updateUserTest() throws Exception {
+    public void updateTest() throws Exception {
         User user = userService.findByUserForNotDelete(User.builder().id(99L).build()).get();
         System.out.println(user);
         user.setNickname("테스트계정100");
-        System.out.println(userService.updateUser(user));
+        System.out.println(userService.update(user));
     }
 
     @Test

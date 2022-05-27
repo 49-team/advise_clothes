@@ -35,7 +35,7 @@ public class SessionController {
     @PostMapping("")
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
         return userService.findByUser(session.getUser()).map(user ->
-                ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(session))
+                ResponseEntity.status(HttpStatus.OK).body(sessionService.create(session))
         ).orElseGet(() ->
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session())
         );
@@ -52,7 +52,7 @@ public class SessionController {
                 .build();
 
         return sessionService.findBySessionKey(sessionToDelete).map(value ->
-            ResponseEntity.status(HttpStatus.OK).body(sessionService.deleteSession(value))
+            ResponseEntity.status(HttpStatus.OK).body(sessionService.delete(value))
         ).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
     }
 }
