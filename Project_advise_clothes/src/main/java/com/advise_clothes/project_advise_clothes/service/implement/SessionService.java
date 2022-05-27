@@ -16,7 +16,6 @@ import java.util.Optional;
 @Service
 public class SessionService implements SessionServiceInterface {
     private final SessionRepository sessionRepository;
-    private final UserRepository userRepository;
     private final Encryption encryption;
 
     /**
@@ -42,10 +41,10 @@ public class SessionService implements SessionServiceInterface {
      * @param session
      * @return 새로운 Session 생성(생성된 Session), 이미 Session 발급(생성자), 없는 회원(Session.id = -1L)
      */
-    public Session createSession(Session session) {
+    public Session create(Session session) {
         // 1. 재로그인 경우 기존 세션 지우기(id and platform 동일)
         // 2. 동일한 sessionKey 있는지 검사 - sessionKey가 같으면 session도 같은 것
-        // 3. User 검사는 Controller에서 이루어짐
+        // 3. User 검사는 Controller에서 이루어짐 -> 이 함수에서 검사하는 게 좋을 거 같음
         try {
             return sessionRepository.findByUserAndPlatform(session.getUser(), session.getPlatform())
                     .map(value -> {
@@ -57,21 +56,19 @@ public class SessionService implements SessionServiceInterface {
                         session.setSessionKey(createSessionKey(session));
                         return sessionRepository.save(session);
                     });
-
         // DB에 2개 이상의 User and platform이 검색됐을 경우
         } catch (IncorrectResultSizeDataAccessException e) {
             sessionRepository.deleteAll(sessionRepository.findAllByUser(session.getUser()));
             session.setSessionKey(createSessionKey(session));
             return sessionRepository.save(session);
         }
-
     }
 
-    public Session deleteSession(Session session) {
+    public Session delete(Session session) {
         return sessionRepository.findBySessionKey(session.getSessionKey()).map(value -> {
             sessionRepository.delete(value);
             // 나중에 Log 기록 등 처리
-            return new Session();
+            return value;
         }).orElseGet(Session::new);
     }
 

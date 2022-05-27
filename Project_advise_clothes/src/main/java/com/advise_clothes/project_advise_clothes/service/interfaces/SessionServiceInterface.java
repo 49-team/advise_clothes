@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface SessionServiceInterface {
     public Optional<Session> findBySessionKey(Session session);
     public boolean isExist(Session session);
-    public Session createSession(Session session);
-    public Session deleteSession(Session session);
+    public Session create(Session session);
+    public Session delete(Session session);
 }

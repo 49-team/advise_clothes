@@ -26,7 +26,7 @@ public class UserService implements UserServiceInterface {
      * @param user
      * @return
      */
-    public User createUser(User user) {
+    public User create(User user) {
         // 비밀번호 소문자, 숫자, 특수문자 들어갔는지 체크
         user.setPassword(encryptPassword(user.getPassword()));
         user.setCreatedAt(null);
@@ -99,14 +99,14 @@ public class UserService implements UserServiceInterface {
      * @param user
      * @return
      */
-    public User updateUser(User user) {
+    public User update(User user) {
         return userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE).map(value -> {
                 value.setPassword(encryptPassword(user.getPassword()));
                 return userRepository.save(value);
             }).orElseGet(User::new);
     }
 
-    public User deleteUser(User user) {
+    public User delete(User user) {
         return userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE).map(value -> {
             value.setDeletedReason(user.getDeletedReason());
             return userRepository.save(value);

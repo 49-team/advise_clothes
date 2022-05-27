@@ -69,7 +69,7 @@ public class UserController {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(User.builder().account(value.getAccount()).build()))
         .orElseGet(() ->
             (user.getAccount() != null && user.getPassword() != null && user.getNickname() != null && user.getEmail() != null && user.getPhoneNumber() != null )?
-                ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user)) :
+                ResponseEntity.status(HttpStatus.CREATED).body(userService.create(user)) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
@@ -91,7 +91,7 @@ public class UserController {
                     if (user.getArea() != null) { value.setArea(user.getArea()); }
                     if (user.getHeight() != null) { value.setHeight(user.getHeight()); }
                     if (user.getWeight() != null) { value.setWeight(user.getWeight()); }
-                    return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+                    return ResponseEntity.status(HttpStatus.OK).body(userService.update(value));
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
     }
@@ -107,7 +107,7 @@ public class UserController {
             if (session.getUser().getArea() != null) { value.setArea(session.getUser().getArea()); }
             if (session.getUser().getHeight() != null) { value.setHeight(session.getUser().getHeight()); }
             if (session.getUser().getWeight() != null) { value.setWeight(session.getUser().getWeight()); }
-            return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+            return ResponseEntity.status(HttpStatus.OK).body(userService.update(value));
         })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User())) :
                 ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User());
@@ -126,7 +126,7 @@ public class UserController {
         User userToFind = User.builder().account(account).build();
         return userService.findByUserForNotDelete(userToFind).map(value -> {
             value.setDeletedReason(1);
-            return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(value));
+            return ResponseEntity.status(HttpStatus.OK).body(userService.delete(value));
         }).orElseGet(() ->
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
@@ -140,7 +140,7 @@ public class UserController {
     public ResponseEntity<User> resetDeleteUser(@PathVariable String account) {
         return userService.findByUser(User.builder().account(account).build()).map(value -> {
             value.setDeletedReason(0);
-            return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+            return ResponseEntity.status(HttpStatus.OK).body(userService.update(value));
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
     }
 }
