@@ -14,9 +14,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
-//@CrossOrigin(origins = {"http://52.79.195.60:80", "http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:80"} )
 public class UserController {
 
+    // session check하는 private method 만들기
     private final UserService userService;
     private final SessionService sessionService;
 
@@ -75,6 +75,7 @@ public class UserController {
 
     /**
      * 유저 정보 변경
+     * 수정 필요
      * @param account 변경할 계정
      * @param user 변경할 값
      * @return
