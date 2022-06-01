@@ -1,9 +1,13 @@
 package com.advise_clothes.project_advise_clothes.entity;
 
 import com.advise_clothes.project_advise_clothes.entity.User;
+<<<<<<< HEAD
 import com.advise_clothes.project_advise_clothes.entity.config.AuditingEntity;
 import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+=======
+import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
+>>>>>>> base/backend
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,8 +37,11 @@ public class Session {
 
     @CreatedDate
     private LocalDateTime createdAt;
+<<<<<<< HEAD
     @LastModifiedDate
     private LocalDateTime updatedAt;        // 필요할..까..?
+=======
+>>>>>>> base/backend
 
     @ManyToOne
     @ToString.Exclude

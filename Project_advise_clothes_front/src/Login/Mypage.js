@@ -19,7 +19,11 @@ function Mypage() {
     const [phoneError, setPhoneError] = useState(false);
     const [removeInputError, setRemoveInputError] = useState(false);
 
+<<<<<<< HEAD
     const URL = `/api/users/${cookies.info.account}`;
+=======
+    const URL = `${"http://"+window.location.hostname+":8080"}/api/users/${cookies.info.account}`;
+>>>>>>> base/backend
 
     const onNickChangeHandler = (e) => {
         setNickChange(e.target.value);
