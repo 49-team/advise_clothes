@@ -2,8 +2,13 @@ package com.advise_clothes.project_advise_clothes.controller;
 
 import com.advise_clothes.project_advise_clothes.entity.Session;
 import com.advise_clothes.project_advise_clothes.entity.User;
+<<<<<<< HEAD
 import com.advise_clothes.project_advise_clothes.service.SessionService;
 import com.advise_clothes.project_advise_clothes.service.UserService;
+=======
+import com.advise_clothes.project_advise_clothes.service.implement.SessionService;
+import com.advise_clothes.project_advise_clothes.service.implement.UserService;
+>>>>>>> base/backend
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +19,15 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
+<<<<<<< HEAD
 //@CrossOrigin(origins = {"http://52.79.195.60:80", "http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:80"} )
 public class UserController {
 
+=======
+public class UserController {
+
+    // session check하는 private method 만들기
+>>>>>>> base/backend
     private final UserService userService;
     private final SessionService sessionService;
 
@@ -69,12 +80,20 @@ public class UserController {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(User.builder().account(value.getAccount()).build()))
         .orElseGet(() ->
             (user.getAccount() != null && user.getPassword() != null && user.getNickname() != null && user.getEmail() != null && user.getPhoneNumber() != null )?
+<<<<<<< HEAD
                 ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user)) :
+=======
+                ResponseEntity.status(HttpStatus.CREATED).body(userService.create(user)) :
+>>>>>>> base/backend
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
     /**
      * 유저 정보 변경
+<<<<<<< HEAD
+=======
+     * 수정 필요
+>>>>>>> base/backend
      * @param account 변경할 계정
      * @param user 변경할 값
      * @return
@@ -91,7 +110,11 @@ public class UserController {
                     if (user.getArea() != null) { value.setArea(user.getArea()); }
                     if (user.getHeight() != null) { value.setHeight(user.getHeight()); }
                     if (user.getWeight() != null) { value.setWeight(user.getWeight()); }
+<<<<<<< HEAD
                     return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+=======
+                    return ResponseEntity.status(HttpStatus.OK).body(userService.update(value));
+>>>>>>> base/backend
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
     }
@@ -99,7 +122,11 @@ public class UserController {
     // 테스트 아직 안 해봄
     @PutMapping("/{session}")
     public ResponseEntity<User> updateUser(@PathVariable Session session) {
+<<<<<<< HEAD
         return sessionService.isExist(session)? userService.findByUserForNotDelete(session.getUser()).map(value -> {
+=======
+        return sessionService.findBySessionKey(session).isPresent()? userService.findByUserForNotDelete(session.getUser()).map(value -> {
+>>>>>>> base/backend
             if (session.getUser().getPassword() != null) { value.setPassword(session.getUser().getPassword()); }
             if (session.getUser().getNickname() != null) { value.setNickname(session.getUser().getNickname()); }
             if (session.getUser().getEmail() != null) { value.setEmail(session.getUser().getEmail()); }
@@ -107,7 +134,11 @@ public class UserController {
             if (session.getUser().getArea() != null) { value.setArea(session.getUser().getArea()); }
             if (session.getUser().getHeight() != null) { value.setHeight(session.getUser().getHeight()); }
             if (session.getUser().getWeight() != null) { value.setWeight(session.getUser().getWeight()); }
+<<<<<<< HEAD
             return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+=======
+            return ResponseEntity.status(HttpStatus.OK).body(userService.update(value));
+>>>>>>> base/backend
         })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User())) :
                 ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User());
@@ -126,16 +157,32 @@ public class UserController {
         User userToFind = User.builder().account(account).build();
         return userService.findByUserForNotDelete(userToFind).map(value -> {
             value.setDeletedReason(1);
+<<<<<<< HEAD
             return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(value));
+=======
+            return ResponseEntity.status(HttpStatus.OK).body(userService.delete(value));
+>>>>>>> base/backend
         }).orElseGet(() ->
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User()));
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * 임의로 만든 메서드. url로 간단하게 회원탈퇴를 복구할 수 있도록 했다.
+     * @param account
+     * @return
+     */
+>>>>>>> base/backend
     @DeleteMapping("/{account}/reset")
     public ResponseEntity<User> resetDeleteUser(@PathVariable String account) {
         return userService.findByUser(User.builder().account(account).build()).map(value -> {
             value.setDeletedReason(0);
+<<<<<<< HEAD
             return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(value));
+=======
+            return ResponseEntity.status(HttpStatus.OK).body(userService.update(value));
+>>>>>>> base/backend
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(new User()));
     }
 }

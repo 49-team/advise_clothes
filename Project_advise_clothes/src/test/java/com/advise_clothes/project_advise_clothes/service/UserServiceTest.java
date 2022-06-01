@@ -2,6 +2,11 @@ package com.advise_clothes.project_advise_clothes.service;
 
 import com.advise_clothes.project_advise_clothes.ProjectAdviseClothesApplicationTests;
 import com.advise_clothes.project_advise_clothes.entity.User;
+<<<<<<< HEAD
+=======
+import com.advise_clothes.project_advise_clothes.repository.UserRepository;
+import com.advise_clothes.project_advise_clothes.service.implement.UserService;
+>>>>>>> base/backend
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +16,13 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
 
     @Autowired
     private UserService userService;
+<<<<<<< HEAD
+=======
+    @Autowired
+    private UserRepository userRepository;
+    private User user = userRepository.findById(1L).orElseThrow();
+
+>>>>>>> base/backend
 
     @Test
     public void findAllTest() {
@@ -33,7 +45,11 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
 
     @Test
     @Transactional
+<<<<<<< HEAD
     public void createUserTest() {
+=======
+    public void createTest() {
+>>>>>>> base/backend
         int count = 102;
         User newUser = User.builder()
                 .account("testAccount" + count)
@@ -48,6 +64,7 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
                 .deletedReason(0)
                 .build();
 
+<<<<<<< HEAD
         System.out.println(userService.createUser(newUser));
     }
 
@@ -57,6 +74,17 @@ public class UserServiceTest extends ProjectAdviseClothesApplicationTests {
         System.out.println(user);
         user.setNickname("테스트계정100");
         System.out.println(userService.updateUser(user));
+=======
+        System.out.println(userService.create(newUser));
+    }
+
+    @Test
+    public void updateTest() throws Exception {
+        User user = userService.findByUserForNotDelete(User.builder().id(99L).build()).get();
+        System.out.println(user);
+        user.setNickname("테스트계정100");
+        System.out.println(userService.update(user));
+>>>>>>> base/backend
     }
 
     @Test

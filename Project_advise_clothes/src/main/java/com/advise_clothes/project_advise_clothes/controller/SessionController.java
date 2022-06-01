@@ -1,10 +1,15 @@
 package com.advise_clothes.project_advise_clothes.controller;
 
 import com.advise_clothes.project_advise_clothes.entity.Session;
+<<<<<<< HEAD
 import com.advise_clothes.project_advise_clothes.entity.User;
 import com.advise_clothes.project_advise_clothes.entity.config.SessionType;
 import com.advise_clothes.project_advise_clothes.service.SessionService;
 import com.advise_clothes.project_advise_clothes.service.UserService;
+=======
+import com.advise_clothes.project_advise_clothes.service.implement.SessionService;
+import com.advise_clothes.project_advise_clothes.service.implement.UserService;
+>>>>>>> base/backend
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +33,11 @@ public class SessionController {
                 .sessionKey(URLDecoder.decode(sessionKey, StandardCharsets.UTF_8))
                 .build();
 
+<<<<<<< HEAD
         return sessionService.getSession(sessionToFind).map(value ->
+=======
+        return sessionService.findBySessionKey(sessionToFind).map(value ->
+>>>>>>> base/backend
             ResponseEntity.status(HttpStatus.OK).body(value))
         .orElseGet(() ->
             ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Session()));
@@ -37,15 +46,25 @@ public class SessionController {
     @PostMapping("")
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
         return userService.findByUser(session.getUser()).map(user ->
+<<<<<<< HEAD
                 ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(session))
+=======
+                ResponseEntity.status(HttpStatus.OK).body(sessionService.create(session))
+>>>>>>> base/backend
         ).orElseGet(() ->
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session())
         );
 
+<<<<<<< HEAD
 //        return userService.findByUser(userToFind).map(value ->
 //            ResponseEntity.status(HttpStatus.OK).body(sessionService.createSession(Session.builder().user(value).platform(session.getPlatform()).build())))
 //        .orElseGet(() ->
 //            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
+=======
+//        return userService.findByUser(session.getUser()).map(user -> {
+//            sessionService.findBySessionKey(session).map()
+//        })
+>>>>>>> base/backend
     }
 
     @DeleteMapping("/{sessionKey}")
@@ -54,8 +73,13 @@ public class SessionController {
                 .sessionKey(URLDecoder.decode(sessionKey, StandardCharsets.UTF_8))
                 .build();
 
+<<<<<<< HEAD
         return sessionService.getSession(sessionToDelete).map(value ->
             ResponseEntity.status(HttpStatus.OK).body(sessionService.deleteSession(value))
+=======
+        return sessionService.findBySessionKey(sessionToDelete).map(value ->
+            ResponseEntity.status(HttpStatus.OK).body(sessionService.delete(value))
+>>>>>>> base/backend
         ).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
     }
 }
