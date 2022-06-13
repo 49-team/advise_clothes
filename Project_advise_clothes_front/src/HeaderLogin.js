@@ -66,7 +66,8 @@ function HeaderLogin() {
                         <Nav.Link as={Link} to="/community">Community</Nav.Link>
                         <button style={btn_out} onClick={()=> {
                             removeCookie('info');
-                            localStorage.removeItem("account");
+                            // localStorage.removeItem("account");  cookie 활용을 위해 제거
+                            removeCookie('auth');
                             return window.location.replace("/");
                         }}>로그아웃</button>
                     </Nav>

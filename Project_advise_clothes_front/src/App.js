@@ -15,16 +15,18 @@ import PrivateRoute from './Login/PrivateRoute';
 import PublicRoute from './Login/PublicRoute';
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import isLogin from './Login/isLogin';
 
 
 function App() {
-    const [cookies, setCookies, removeCookie] = useCookies(['info']);
+    const [cookies, setCookies, removeCookie] = useCookies(['info', 'auth']);
 
     return (
         <div className="App">
             <header>
                 <Switch>
-                    {cookies.info? <HeaderLogin/> : <Header/>}
+                    {/* {cookies.info? <HeaderLogin/> : <Header/>} cookie 활용을 위해 제거 */}
+                    {isLogin()? <HeaderLogin/> : <Header/>}
 
                     {/* HeaderLogin 로그인 했을 때 로그인 정보랑 마이페이지 연결되게 */}
                 </Switch>
