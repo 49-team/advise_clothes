@@ -6,7 +6,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-//@Configuration
 public class ServerBackendApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
