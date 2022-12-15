@@ -29,15 +29,14 @@ public class UserService implements UserServiceInterface {
     public User create(User user) {
         // 비밀번호 소문자, 숫자, 특수문자 들어갔는지 체크
         user.setPassword(encryptPassword(user.getPassword()));
-        user.setCreatedAt(null);
+        user.setCreatedAt(null);        // 값을 입력했으면 지워버리기
         user.setUpdatedAt(null);
-        user.setCreatedBy(user.getAccount());
         user.setDeletedReason(0);
         return userRepository.save(user);
     }
 
     /**
-     * 로그인
+     * 로그인 - 삭제 필요
      * @param user 'account' and 'password'가 들어있는 User 객체
      * @return
      */
