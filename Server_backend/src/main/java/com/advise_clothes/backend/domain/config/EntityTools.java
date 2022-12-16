@@ -1,6 +1,6 @@
 package com.advise_clothes.backend.domain.config;
 
-import com.advise_clothes.backend.config.AuditingEntity;
+import com.advise_clothes.backend.config.BaseEntity;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * Entity를 효과적으로 다루기 위한 클래스
+ * TODO 굳이 필요한가 싶어서 한 달 정도 두고보고 지워야겠다 221216
  */
 public class EntityTools {
     /**
@@ -19,7 +20,7 @@ public class EntityTools {
      * @throws Exception
      * @author 임리을
      */
-    public static Map<String, Object> toMap(AuditingEntity entity) throws Exception {
+    public static Map<String, Object> toMap(BaseEntity entity) throws Exception {
         Map<String, Object> result = new HashMap<>();
 
         BeanInfo info = Introspector.getBeanInfo(entity.getClass());
@@ -44,7 +45,7 @@ public class EntityTools {
         return result;
     }
 
-    public static boolean isParams(AuditingEntity entity, String[] arr) throws Exception {
+    public static boolean isParams(BaseEntity entity, String[] arr) throws Exception {
         return Arrays.stream(arr).allMatch(x -> {
             try {
                 return toMap(entity).get(x) != null;

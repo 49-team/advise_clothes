@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.controller.config;
+package com.advise_clothes.backend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,9 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * application.yml으로 옮기고 싶었으나 실패하고 다시 복구했다..
+     * @param http the {@link HttpSecurity} to modify
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // security 로그인 화면 삭제, csrf 미사용
         http.httpBasic().disable().csrf().disable();
     }
 }

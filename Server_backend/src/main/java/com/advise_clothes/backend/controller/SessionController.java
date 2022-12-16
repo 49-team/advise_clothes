@@ -1,8 +1,8 @@
 package com.advise_clothes.backend.controller;
 
-import com.advise_clothes.backend.domain.Session;
-import com.advise_clothes.backend.service.implement.SessionService;
-import com.advise_clothes.backend.service.implement.UserService;
+import com.advise_clothes.backend.domain.entity.Session;
+import com.advise_clothes.backend.service.SessionService;
+import com.advise_clothes.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,17 +1,17 @@
-package com.advise_clothes.backend.service.implement;
+package com.advise_clothes.backend.service;
 
-import com.advise_clothes.backend.domain.User;
+import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.repository.UserRepository;
-import com.advise_clothes.backend.service.interfaces.UserServiceInterface;
 import com.advise_clothes.backend.service.security.Encryption;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class UserService implements UserServiceInterface {
+public class UserService {
 
     private final UserRepository userRepository;
     private final Encryption encryption;
@@ -29,8 +29,6 @@ public class UserService implements UserServiceInterface {
     public User create(User user) {
         // 비밀번호 소문자, 숫자, 특수문자 들어갔는지 체크
         user.setPassword(encryptPassword(user.getPassword()));
-        user.setCreatedAt(null);        // 값을 입력했으면 지워버리기
-        user.setUpdatedAt(null);
         user.setDeletedReason(0);
         return userRepository.save(user);
     }
@@ -67,7 +65,12 @@ public class UserService implements UserServiceInterface {
      */
     public Optional<User> findByUserForNotDelete(User user) {
         // nickname으론 검색 x
-        User userToFind = User.builder().id(user.getId()).account(user.getAccount()).phoneNumber(user.getPhoneNumber()).email(user.getEmail()).build();
+        User userToFind = User.builder()
+//                .id(user.getId())
+                .account(user.getAccount())
+                .phoneNumber(user.getPhoneNumber())
+                .email(user.getEmail())
+                .build();
         return findByUser(userToFind).filter(value -> value.getDeletedReason() == NO_DELETE);
 
         // 위에 코드가 잘 작동하면 삭제

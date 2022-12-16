@@ -1,8 +1,8 @@
-package com.advise_clothes.backend.domain;
+package com.advise_clothes.backend.domain.entity;
 
+import com.advise_clothes.backend.config.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -14,19 +14,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @ToString
-@Accessors(chain = true)
-@EntityListeners(AuditingEntityListener.class)
-public class User {
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String account;
     private String password;
     private String nickname;
@@ -37,13 +32,7 @@ public class User {
     private Integer height;
     private Integer weight;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
-    @CreatedBy
     private String createdBy;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-    @LastModifiedBy
     private String updatedBy;
     private Integer deletedReason;
 
@@ -53,16 +42,20 @@ public class User {
     @JsonIgnore
     private List<Session> sessionList = new ArrayList<>();
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-//        User user = (User) o;
-//        return id != null && Objects.equals(id, user.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return this.id.hashCode();
-//    }
+    @Builder
+    public User(String account, String password, String nickname, String email, String phoneNumber, Integer gender, String area, Integer height, Integer weight, String createdBy, String updatedBy, Integer deletedReason, List<Session> sessionList) {
+        this.account = account;
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.area = area;
+        this.height = height;
+        this.weight = weight;
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+        this.deletedReason = deletedReason;
+        this.sessionList = sessionList;
+    }
 }

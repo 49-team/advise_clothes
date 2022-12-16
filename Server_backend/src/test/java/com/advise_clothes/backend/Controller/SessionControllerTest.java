@@ -29,7 +29,7 @@ class SessionControllerTest extends ServerBackendApplicationTests {
     @DisplayName("/api/session/{sessionKey} GET 요청 시 세션 조회")
     void read() throws Exception {
         // given
-        String sessionKey = sessionRepository.findById(19L).get().getSessionKey();
+        String sessionKey = sessionRepository.findById(25L).get().getSessionKey();
 
         // excepted
         mockMvc.perform(get("/api/session/{sessionKey}", sessionKey))
