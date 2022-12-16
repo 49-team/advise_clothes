@@ -1,6 +1,6 @@
 package com.advise_clothes.backend.controller;
 
-import com.advise_clothes.backend.entity.Session;
+import com.advise_clothes.backend.domain.Session;
 import com.advise_clothes.backend.service.implement.SessionService;
 import com.advise_clothes.backend.service.implement.UserService;
 import lombok.RequiredArgsConstructor;

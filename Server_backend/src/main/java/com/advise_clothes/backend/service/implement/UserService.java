@@ -1,6 +1,6 @@
 package com.advise_clothes.backend.service.implement;
 
-import com.advise_clothes.backend.entity.User;
+import com.advise_clothes.backend.domain.User;
 import com.advise_clothes.backend.repository.UserRepository;
 import com.advise_clothes.backend.service.interfaces.UserServiceInterface;
 import com.advise_clothes.backend.service.security.Encryption;

@@ -1,6 +1,6 @@
 package com.advise_clothes.backend.service.interfaces;
 
-import com.advise_clothes.backend.entity.Session;
+import com.advise_clothes.backend.domain.Session;
 
 import java.util.Optional;
 

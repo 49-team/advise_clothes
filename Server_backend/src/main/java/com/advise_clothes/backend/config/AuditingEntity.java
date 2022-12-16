@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.entity.config;
+package com.advise_clothes.backend.config;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

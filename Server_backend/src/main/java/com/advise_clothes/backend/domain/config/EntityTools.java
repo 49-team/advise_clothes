@@ -1,4 +1,6 @@
-package com.advise_clothes.backend.entity.config;
+package com.advise_clothes.backend.domain.config;
+
+import com.advise_clothes.backend.config.AuditingEntity;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

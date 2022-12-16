@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.entity;
+package com.advise_clothes.backend.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

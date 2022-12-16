@@ -1,7 +1,7 @@
 package com.advise_clothes.backend.Controller;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.entity.User;
+import com.advise_clothes.backend.domain.User;
 import com.advise_clothes.backend.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

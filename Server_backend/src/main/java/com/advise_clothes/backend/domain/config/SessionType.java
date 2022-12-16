@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.entity.config;
+package com.advise_clothes.backend.domain.config;
 
 public enum SessionType {
     BROWSER,

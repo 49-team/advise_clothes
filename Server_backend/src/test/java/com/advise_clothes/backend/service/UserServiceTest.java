@@ -1,10 +1,9 @@
 package com.advise_clothes.backend.service;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.entity.User;
+import com.advise_clothes.backend.domain.User;
 import com.advise_clothes.backend.repository.UserRepository;
 import com.advise_clothes.backend.service.implement.UserService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class UserServiceTest extends ServerBackendApplicationTests {
     @Transactional
     void getUser() {
         // given
-        User user = userRepository.save(User.builder()
+        User createUser = userRepository.save(User.builder()
                 .account("testCreateUser")
                 .password("testPassword")
                 .nickname("ABCDEFG")
@@ -74,11 +73,83 @@ public class UserServiceTest extends ServerBackendApplicationTests {
         );
 
         // when
-        User getUser = userService.findByUser(User.builder().account("testCreateUser").build())
+        User user = userService.findByUser(User.builder().account("testCreateUser").build())
                 .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
 
         // then
-        assertEquals(user.toString(), getUser.toString());
+        assertEquals(createUser.toString(), user.toString());
     }
 
+    @Test
+    @DisplayName("탈퇴하지 않은 유저 찾기")
+    @Transactional
+    void getUserNotDelete() {
+        // given
+        User createUser = userRepository.save(User.builder()
+                .account("testCreateUser")
+                .password("testPassword")
+                .nickname("ABCDEFG")
+                .createdBy("JUnit5")
+                .email("rieul.im@gmail.com")
+                .deletedReason(0)
+                .phoneNumber("888-8888-8888")
+                .build()
+        );
+
+        // when
+        User user = userService.findByUserForNotDelete(createUser)
+                .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다"));
+
+        // then
+        assertEquals(createUser.toString(), user.toString());
+    }
+
+    @Test
+    @DisplayName("유저 수정")
+    @Transactional
+    void updateUser() {
+        // given
+        User createUser = userRepository.save(User.builder()
+                .account("testCreateUser")
+                .password("testPassword")
+                .nickname("ABCDEFG")
+                .createdBy("JUnit5")
+                .email("rieul.im@gmail.com")
+                .deletedReason(0)
+                .phoneNumber("888-8888-8888")
+                .build()
+        );
+
+        // when
+        createUser.setNickname("ABCD");
+        User user = userService.update(createUser);
+
+        // then
+        assertEquals("testCreateUser", user.getAccount());
+        assertEquals("ABCD", user.getNickname());
+    }
+
+    @Test
+    @DisplayName("유저 삭제(유저 삭제  값 1)")
+    @Transactional
+    void delete() {
+        // given
+        User createUser = userRepository.save(User.builder()
+                .account("testCreateUser")
+                .password("testPassword")
+                .nickname("ABCDEFG")
+                .createdBy("JUnit5")
+                .email("rieul.im@gmail.com")
+                .deletedReason(0)
+                .phoneNumber("888-8888-8888")
+                .build()
+        );
+
+        // when
+        User user = userService.delete(createUser);
+
+        // then
+        assertEquals("testCreateUser", user.getAccount());
+        assertEquals(1, user.getDeletedReason());
+    }
 }

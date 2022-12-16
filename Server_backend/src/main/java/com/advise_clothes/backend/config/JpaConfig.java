@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.entity.config;
+package com.advise_clothes.backend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

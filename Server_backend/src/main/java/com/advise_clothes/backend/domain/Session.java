@@ -1,6 +1,6 @@
-package com.advise_clothes.backend.entity;
+package com.advise_clothes.backend.domain;
 
-import com.advise_clothes.backend.entity.config.SessionType;
+import com.advise_clothes.backend.domain.config.SessionType;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;

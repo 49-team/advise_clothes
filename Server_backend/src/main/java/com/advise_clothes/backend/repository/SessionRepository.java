@@ -1,8 +1,8 @@
 package com.advise_clothes.backend.repository;
 
-import com.advise_clothes.backend.entity.Session;
-import com.advise_clothes.backend.entity.User;
-import com.advise_clothes.backend.entity.config.SessionType;
+import com.advise_clothes.backend.domain.Session;
+import com.advise_clothes.backend.domain.User;
+import com.advise_clothes.backend.domain.config.SessionType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

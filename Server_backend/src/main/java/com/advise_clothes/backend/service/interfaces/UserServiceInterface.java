@@ -1,6 +1,6 @@
 package com.advise_clothes.backend.service.interfaces;
 
-import com.advise_clothes.backend.entity.User;
+import com.advise_clothes.backend.domain.User;
 
 import java.util.List;
 import java.util.Optional;
