@@ -1,6 +1,7 @@
 package com.advise_clothes.backend.config;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,6 +19,10 @@ public class BaseEntity {
     private Long id;
     @CreatedDate
     private LocalDateTime createdAt;
+    @Setter
+    protected String createdBy;
     @LastModifiedDate
     private LocalDateTime updatedAt;
+    @Setter
+    protected String updatedBy;
 }

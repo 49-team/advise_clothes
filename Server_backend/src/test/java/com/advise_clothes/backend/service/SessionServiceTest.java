@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import static com.advise_clothes.backend.domain.entity.Session.SessionType.BROWSER;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SessionServiceTest extends ServerBackendApplicationTests {
+class SessionServiceTest extends ServerBackendApplicationTests {
 
     @Autowired
     private SessionService sessionService;

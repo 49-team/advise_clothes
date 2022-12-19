@@ -40,6 +40,7 @@ public class User extends BaseEntity {
     @ToString.Exclude
 //    @JsonBackReference
     @JsonIgnore
+    @Builder.Default
     private List<Session> sessionList = new ArrayList<>();
 
     @Builder
