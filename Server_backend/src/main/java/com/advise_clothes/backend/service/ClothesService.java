@@ -1,11 +1,12 @@
 package com.advise_clothes.backend.service;
 
 import com.advise_clothes.backend.domain.business.ClothesEditor;
+import com.advise_clothes.backend.domain.entity.Clothes;
+import com.advise_clothes.backend.exception.ClothesNotFound;
+import com.advise_clothes.backend.repository.ClothesRepository;
+import com.advise_clothes.backend.request.ClothesCreate;
 import com.advise_clothes.backend.request.ClothesEdit;
 import com.advise_clothes.backend.response.ClothesResponse;
-import com.advise_clothes.backend.request.ClothesCreate;
-import com.advise_clothes.backend.domain.entity.Clothes;
-import com.advise_clothes.backend.repository.ClothesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class ClothesService {
     private final ClothesRepository clothesRepository;
 
     public void create(ClothesCreate clothesCreate) {
+        clothesCreate.validate();
         clothesRepository.save(Clothes.builder()
                         .name(clothesCreate.getName())
                         .company(clothesCreate.getCompany())
@@ -29,14 +31,14 @@ public class ClothesService {
 
     public ClothesResponse get(Long id) {
         Clothes clothes = clothesRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("옷을 찾을 수 없습니다"));
+                .orElseThrow(ClothesNotFound::new);
         return new ClothesResponse(clothes);
     }
 
     @Transactional
     public void edit(Long id, ClothesEdit clothesEdit) {
         Clothes clothes = clothesRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("옷을 찾을 수 없습니다"));
+                .orElseThrow(ClothesNotFound::new);
 
         ClothesEditor.ClothesEditorBuilder editorBuilder = clothes.toEditor();
 
@@ -48,5 +50,12 @@ public class ClothesService {
                 .build();
 
         clothes.edit(clothesEditor);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Clothes clothes = clothesRepository.findById(id)
+                .orElseThrow(ClothesNotFound::new);
+        clothesRepository.delete(clothes);
     }
 }

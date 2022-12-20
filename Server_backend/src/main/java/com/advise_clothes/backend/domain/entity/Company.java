@@ -1,6 +1,7 @@
 package com.advise_clothes.backend.domain.entity;
 
 import com.advise_clothes.backend.config.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Company extends BaseEntity {
     private String name;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private List<Clothes> clothesList = new ArrayList<>();
 

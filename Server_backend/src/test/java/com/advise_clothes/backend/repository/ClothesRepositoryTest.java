@@ -5,7 +5,6 @@ import com.advise_clothes.backend.domain.entity.Clothes;
 import com.advise_clothes.backend.domain.entity.Company;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 
 import javax.transaction.Transactional;
 

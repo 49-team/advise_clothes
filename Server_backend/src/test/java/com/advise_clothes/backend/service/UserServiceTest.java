@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserServiceTest extends ServerBackendApplicationTests {
+class UserServiceTest extends ServerBackendApplicationTests {
 
     @Autowired
     private UserService userService;

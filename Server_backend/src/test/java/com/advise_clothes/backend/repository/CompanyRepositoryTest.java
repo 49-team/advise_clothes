@@ -16,7 +16,7 @@ class CompanyRepositoryTest extends ServerBackendApplicationTests {
     @Transactional
     void create() {
         Company company = Company.builder()
-                .name("AdviseClothes")
+                .name("testCompany")
                 .createdBy("임리을")
                 .build();
 

@@ -110,7 +110,7 @@ public class UserService {
 
     public User delete(User user) {
         return userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE).map(value -> {
-            value.setDeletedReason(user.getDeletedReason());
+            value.setDeletedReason(1);
             return userRepository.save(value);
         }).orElseGet(User::new);
     }
