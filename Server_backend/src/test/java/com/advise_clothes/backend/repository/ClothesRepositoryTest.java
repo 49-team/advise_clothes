@@ -9,6 +9,8 @@ import org.springframework.security.core.parameters.P;
 
 import javax.transaction.Transactional;
 
+import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
+
 class ClothesRepositoryTest extends ServerBackendApplicationTests {
 
     @Autowired
@@ -26,6 +28,7 @@ class ClothesRepositoryTest extends ServerBackendApplicationTests {
                 .name("반팔")
                 .company(company)
                 .createdBy("ImRieul")
+                .part(TOP)
                 .build();
 
         clothesRepository.save(clothes);

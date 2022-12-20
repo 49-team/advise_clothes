@@ -128,6 +128,9 @@ public class UserServiceTest extends ServerBackendApplicationTests {
         assertEquals("ABCD", user.getNickname());
     }
 
+    /**
+     * 유저 삭제 값이 변하지 않음
+     */
     @Test
     @DisplayName("유저 삭제(유저 삭제  값 1)")
     @Transactional

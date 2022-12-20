@@ -1,34 +1,32 @@
 package com.advise_clothes.backend.request;
 
-import com.advise_clothes.backend.domain.entity.Clothes;
 import com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum;
 import com.advise_clothes.backend.domain.entity.Company;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 public class ClothesCreate {
 
+    @NotBlank(message = "이름을 입력해주세요.")
     private String name;
+    @NotBlank(message = "회사를 입력해주세요.")
     private Company company;
-    private String createdBy;
+    @NotBlank(message = "종류를 입력해주세요.")
     private ClothesPartEnum part;
+    private String createdBy;
 
-    public ClothesCreate(String name, Company company, String createdBy, ClothesPartEnum part) {
+    @Builder
+    public ClothesCreate(String name, Company company, ClothesPartEnum part, String createdBy) {
         this.name = name;
         this.company = company;
-        this.createdBy = createdBy;
         this.part = part;
-    }
-
-    public Clothes toClothes() {
-        return Clothes.builder()
-                .name(this.name)
-                .company(this.company)
-                .createdBy(this.createdBy)
-                .part(this.part)
-                .build();
+        this.createdBy = createdBy;
     }
 }

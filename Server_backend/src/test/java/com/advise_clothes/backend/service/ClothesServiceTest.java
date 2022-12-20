@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
+import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ClothesServiceTest extends ServerBackendApplicationTests {
@@ -44,6 +45,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
         ClothesCreate clothesCreate = ClothesCreate.builder()
                 .name("반팔티")
                 .company(company)
+                .part(TOP)
                 .build();
 
         // when
@@ -60,12 +62,13 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @Transactional
     void read() {
         // given
-        Clothes createClothes = Clothes.builder()
+        Clothes clothes = clothesRepository.save(Clothes.builder()
                 .name("반팔티")
                 .company(company)
-                .build();
-
-        Clothes clothes = clothesRepository.save(createClothes);
+                .createdBy("JUnit5")
+                .part(TOP)
+                .build()
+        );
 
         // when
         ClothesResponse clothesResponse = clothesService.get(clothes.getId());

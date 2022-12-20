@@ -33,6 +33,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // queryDSL 의존성 추가
+//    implementation "com.querydsl:querydsl-core"
+//    implementation "com.querydsl:querydsl-jpa"
+//    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+
+    // NotNull, NotBlank 등의 어노테이션을 사용하기 위한 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
