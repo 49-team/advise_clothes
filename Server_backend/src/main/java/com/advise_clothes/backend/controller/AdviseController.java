@@ -2,17 +2,17 @@ package com.advise_clothes.backend.controller;
 
 import com.advise_clothes.backend.domain.entity.Clothes;
 import com.advise_clothes.backend.domain.entity.Company;
+import com.advise_clothes.backend.exception.CompanyNotFound;
 import com.advise_clothes.backend.repository.CompanyRepository;
+import com.advise_clothes.backend.request.AdviseCreate;
+import com.advise_clothes.backend.response.ClothesResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
-import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.BOTTOM;
-import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
+import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.*;
 
 @RestController
 @RequestMapping("/api/advise")
@@ -22,37 +22,37 @@ public class AdviseController {
     private final CompanyRepository companyRepository;
 
     @GetMapping("")
-    public List<Clothes> testAdvise(@RequestParam String temperature, @RequestParam String weather) {
+    public List<ClothesResponse> testAdvise(@ModelAttribute @Valid AdviseCreate adviseCreate) {
         Company company = companyRepository.findById(1L)
-                .orElseThrow(() -> new IllegalArgumentException("Not found company"));
+                .orElseThrow(CompanyNotFound::new);
 
-        Clothes top = Clothes.builder()
+        ClothesResponse top = new ClothesResponse(Clothes.builder()
                 .name("니트티")
                 .company(company)
                 .part(TOP)
                 .createdBy("admin")
-                .build();
+                .build());
 
-        Clothes bottom = Clothes.builder()
+        ClothesResponse bottom = new ClothesResponse(Clothes.builder()
                 .name("슬랙스")
                 .company(company)
                 .part(BOTTOM)
                 .createdBy("admin")
-                .build();
+                .build());
 
-        Clothes shoes = Clothes.builder()
+        ClothesResponse shoes = new ClothesResponse(Clothes.builder()
                 .name("운동화")
                 .company(company)
-                .part(BOTTOM)
+                .part(SHOES)
                 .createdBy("admin")
-                .build();
+                .build());
 
-        Clothes outer = Clothes.builder()
+        ClothesResponse outer = new ClothesResponse(Clothes.builder()
                 .name("롱패딩")
                 .company(company)
-                .part(BOTTOM)
+                .part(OUTER)
                 .createdBy("admin")
-                .build();
+                .build());
 
         return List.of(top, bottom, shoes, outer);
     }

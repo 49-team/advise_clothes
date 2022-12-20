@@ -199,7 +199,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     @Test
     @DisplayName("/api/clothes/{clothesId} PUT 요청 시 updatedBy가 없으면 회사 이름 입력")
     @Transactional
-    void editClothesUpdatedByNull() throws Exception {
+    void editClothesWithoutUpdatedBy() throws Exception {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
                 .name("반팔티")
