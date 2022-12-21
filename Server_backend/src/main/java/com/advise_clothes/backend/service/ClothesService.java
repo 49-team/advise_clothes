@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -57,5 +58,10 @@ public class ClothesService {
         Clothes clothes = clothesRepository.findById(id)
                 .orElseThrow(ClothesNotFound::new);
         clothesRepository.delete(clothes);
+    }
+
+    public List<ClothesResponse> advise(int temperature, String weather) {
+
+
     }
 }
