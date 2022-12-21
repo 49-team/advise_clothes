@@ -1,14 +1,13 @@
 package com.advise_clothes.backend.Controller;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.request.AdviseCreate;
+import com.advise_clothes.backend.request.AdviseRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,7 +23,7 @@ class AdviseControllerTest extends ServerBackendApplicationTests {
     @Test
     void getAdvise() throws Exception {
         // given
-        AdviseCreate request = AdviseCreate.builder()
+        AdviseRequest request = AdviseRequest.builder()
                 .temperature("10")
                 .weather("rain")
                 .build();
@@ -71,6 +70,10 @@ class AdviseControllerTest extends ServerBackendApplicationTests {
         mockMvc.perform(get("/api/advise")
                         .param("weather", weather))
                 .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"))
+                .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(jsonPath("$.validation.fieldName").value("temperature"))
+                .andExpect(jsonPath("$.validation.message").value("기온을 입력해주세요."))
                 .andDo(print());
     }
 }

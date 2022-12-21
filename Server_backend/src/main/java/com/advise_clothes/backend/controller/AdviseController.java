@@ -4,12 +4,11 @@ import com.advise_clothes.backend.domain.entity.Clothes;
 import com.advise_clothes.backend.domain.entity.Company;
 import com.advise_clothes.backend.exception.CompanyNotFound;
 import com.advise_clothes.backend.repository.CompanyRepository;
-import com.advise_clothes.backend.request.AdviseCreate;
+import com.advise_clothes.backend.request.AdviseRequest;
 import com.advise_clothes.backend.response.ClothesResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.*;
@@ -22,7 +21,7 @@ public class AdviseController {
     private final CompanyRepository companyRepository;
 
     @GetMapping("")
-    public List<ClothesResponse> testAdvise(@ModelAttribute @Valid AdviseCreate adviseCreate) {
+    public List<ClothesResponse> testAdvise(@ModelAttribute AdviseRequest adviseRequest) {
         Company company = companyRepository.findById(1L)
                 .orElseThrow(CompanyNotFound::new);
 
