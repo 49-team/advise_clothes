@@ -5,8 +5,10 @@ import com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum;
 import com.advise_clothes.backend.domain.entity.Company;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class ClothesResponse {
 
     private final String name;

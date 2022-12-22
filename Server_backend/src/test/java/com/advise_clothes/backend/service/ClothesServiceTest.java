@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ClothesServiceTest extends ServerBackendApplicationTests {
 
@@ -40,7 +42,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
 
     @AfterEach
     void deleteClothes() {
-        clothesRepository.findByName("반팔티").ifPresent(clothesRepository::delete);
+        clothesRepository.findByName("반팔반팔티").ifPresent(clothesRepository::delete);
     }
 
     @Test
@@ -49,18 +51,18 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void create() {
         // given
         ClothesCreate clothesCreate = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .part(TOP)
                 .build();
 
         // when
         clothesService.create(clothesCreate);
-        Clothes clothes = clothesRepository.findByName("반팔티")
+        Clothes clothes = clothesRepository.findByName("반팔반팔티")
                 .orElseThrow(ClothesNotFound::new);
 
         // then
-        assertEquals("반팔티", clothes.getName());
+        assertEquals("반팔반팔티", clothes.getName());
     }
 
     @Test
@@ -69,7 +71,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void createCompanyNull() {
         // given
         ClothesCreate clothesCreate = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(null)
                 .part(TOP)
                 .build();
@@ -84,7 +86,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void createPartNull() {
         // given
         ClothesCreate clothesCreate = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .part(null)
                 .build();
@@ -99,18 +101,18 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void createCreatedByNull() {
         // given
         ClothesCreate clothesCreate = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .part(TOP)
                 .build();
 
         // when
         clothesService.create(clothesCreate);
-        Clothes clothes = clothesRepository.findByName("반팔티")
+        Clothes clothes = clothesRepository.findByName("반팔반팔티")
                 .orElseThrow(ClothesNotFound::new);
 
         // then
-        assertEquals("반팔티", clothes.getName());
+        assertEquals("반팔반팔티", clothes.getName());
         assertEquals("AdviseClothes", clothes.getCompany().getName());
         assertEquals("AdviseClothes", clothes.getCreatedBy());
     }
@@ -123,7 +125,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void read() {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -134,7 +136,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
         ClothesResponse clothesResponse = clothesService.get(clothes.getId());
 
         // then
-        assertEquals("반팔티", clothesResponse.getName());
+        assertEquals("반팔반팔티", clothesResponse.getName());
         assertEquals(company.getName(), clothesResponse.getCompany().getName());
     }
 
@@ -144,7 +146,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void edit() {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -152,7 +154,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
         );
 
         ClothesEdit clothesEdit = ClothesEdit.builder()
-                .name("반팔티2")
+                .name("반팔반팔티2")
                 .build();
 
         // when
@@ -161,7 +163,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
                 .orElseThrow(ClothesNotFound::new);
 
         // then
-        assertEquals("반팔티2", editClothes.getName());
+        assertEquals("반팔반팔티2", editClothes.getName());
     }
 
     @Test
@@ -170,7 +172,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void editUpdatedByNull() {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -178,7 +180,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
         );
 
         ClothesEdit clothesEdit = ClothesEdit.builder()
-                .name("반팔티2")
+                .name("반팔반팔티2")
                 .build();
 
         // when
@@ -187,7 +189,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
                 .orElseThrow(ClothesNotFound::new);
 
         // then
-        assertEquals("반팔티2", editClothes.getName());
+        assertEquals("반팔반팔티2", editClothes.getName());
         assertEquals("AdviseClothes", editClothes.getCompany().getName());
         assertEquals("AdviseClothes", editClothes.getUpdatedBy());
     }
@@ -198,7 +200,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     void delete() {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -212,4 +214,182 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
         assertThrows(RuntimeException.class, () -> clothesRepository.findById(clothes.getId())
                 .orElseThrow(ClothesNotFound::new));
     }
+
+    @Test
+    @DisplayName("옷 추천, 기온이 28도 이상")
+    void adviseTemperature28() {
+        // given
+        int temperature = 28;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        assertEquals(5, clothesResponses.size());
+        assertTrue(responseWithCheck.contains("민소매"));
+        assertTrue(responseWithCheck.contains("반팔티"));
+        assertTrue(responseWithCheck.contains("린넨셔츠"));
+        assertTrue(responseWithCheck.contains("반바지"));
+        assertTrue(responseWithCheck.contains("짧은치마"));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 23 ~ 27도")
+    void adviseTemperature23() {
+        // given
+        int temperature = 23;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+        System.out.println(responseWithCheck);
+
+        assertEquals(4, clothesResponses.size());
+        assertTrue(responseWithCheck.contains("반팔티"));
+        assertTrue(responseWithCheck.contains("얇은셔츠"));
+        assertTrue(responseWithCheck.contains("반바지"));
+        assertTrue(responseWithCheck.contains("면바지"));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 20 ~ 22도")
+    void adviseTemperature20() {
+        // given
+        int temperature = 20;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        assertEquals(4, clothesResponses.size());
+        assertTrue(responseWithCheck.contains("블라우스"));
+        assertTrue(responseWithCheck.contains("긴팔티"));
+        assertTrue(responseWithCheck.contains("면바지"));
+        assertTrue(responseWithCheck.contains("슬랙스"));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 17 ~ 19도")
+    void adviseTemperature17() {
+        // given
+        int temperature = 17;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        List<String> checkList = List.of("니트티", "맨투맨", "후드", "긴바지", "얇은가디건");
+
+        assertEquals(5, clothesResponses.size());
+        assertTrue(responseWithCheck.containsAll(checkList));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 12 ~ 16도")
+    void adviseTemperature12() {
+        // given
+        int temperature = 12;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        assertEquals(7, clothesResponses.size());
+        assertTrue(responseWithCheck.contains("니트티"));
+        assertTrue(responseWithCheck.contains("맨투맨"));
+        assertTrue(responseWithCheck.contains("후드"));
+        assertTrue(responseWithCheck.contains("청바지"));
+        assertTrue(responseWithCheck.contains("자켓"));
+        assertTrue(responseWithCheck.contains("가디건"));
+        assertTrue(responseWithCheck.contains("청자켓"));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 9 ~ 11도")
+    void adviseTemperature9() {
+        // given
+        int temperature = 9;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        List<String> checkList = List.of("니트티", "맨투맨", "후드", "기모바지", "트렌치코트", "야상", "점퍼");
+
+        System.out.println(checkList);
+        System.out.println(responseWithCheck);
+
+        assertEquals(7, clothesResponses.size());
+        assertTrue(responseWithCheck.containsAll(checkList));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 5 ~ 8도")
+    void adviseTemperature5() {
+        // given
+        int temperature = 5;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        List<String> checkList = List.of("니트티", "맨투맨", "후드", "기모티", "기모바지", "울코트");
+
+        assertEquals(6, clothesResponses.size());
+        assertTrue(responseWithCheck.containsAll(checkList));
+    }
+
+    @Test
+    @DisplayName("옷 추천, 기온 4도 이하")
+    void adviseTemperature4() {
+        // given
+        int temperature = 4;
+
+        // when
+        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+
+        // then
+        List<String> responseWithCheck = clothesResponses.stream()
+                .map(ClothesResponse::getName)
+                .collect(Collectors.toList());
+
+        List<String> checkList = List.of("니트티", "맨투맨", "후드", "기모티", "기모바지", "두꺼운코트", "패딩");
+
+        System.out.println(responseWithCheck);
+        System.out.println(checkList);
+
+        assertEquals(7, clothesResponses.size());
+        assertTrue(responseWithCheck.containsAll(checkList));
+    }
+
+
+
 }

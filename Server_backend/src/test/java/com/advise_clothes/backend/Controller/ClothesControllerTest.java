@@ -53,7 +53,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void create() throws Exception {
         // given
         ClothesCreate request = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .part(TOP)
                 .build();
@@ -98,7 +98,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void postNeedCompany() throws Exception {
         // given
         ClothesCreate request = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .part(TOP)
                 .build();
 
@@ -122,7 +122,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void postNeedPart() throws Exception {
         // given
         ClothesCreate request = ClothesCreate.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .build();
 
@@ -145,7 +145,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void getClothes() throws Exception {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -155,7 +155,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
         // excepted
         mockMvc.perform(get("/api/clothes/{clothesId}", clothes.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("반팔티"))
+                .andExpect(jsonPath("$.name").value("반팔반팔티"))
                 .andExpect(jsonPath("$.part").value("TOP"))
                 .andExpect(jsonPath("$.company.id").value(company.getId()))
                 .andDo(print());
@@ -167,7 +167,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void editClothes() throws Exception {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -175,7 +175,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
         );
 
         ClothesEdit clothesEdit = ClothesEdit.builder()
-                .name("반팔티2")
+                .name("반팔반팔티2")
                 .company(company)
                 .part(TOP)
                 .build();
@@ -193,7 +193,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
         Clothes editClothes = clothesRepository.findById(clothes.getId())
                 .orElseThrow(ClothesNotFound::new);
 
-        Assertions.assertEquals("반팔티2", editClothes.getName());
+        Assertions.assertEquals("반팔반팔티2", editClothes.getName());
     }
 
     @Test
@@ -202,7 +202,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void editClothesWithoutUpdatedBy() throws Exception {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)
@@ -210,7 +210,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
         );
 
         ClothesEdit clothesEdit = ClothesEdit.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .part(TOP)
                 .build();
@@ -237,7 +237,7 @@ class ClothesControllerTest extends ServerBackendApplicationTests {
     void deleteClothes() throws Exception {
         // given
         Clothes clothes = clothesRepository.save(Clothes.builder()
-                .name("반팔티")
+                .name("반팔반팔티")
                 .company(company)
                 .createdBy("JUnit5")
                 .part(TOP)

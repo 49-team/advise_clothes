@@ -37,29 +37,4 @@ class ClothesRepositoryTest extends ServerBackendApplicationTests {
 
         clothesRepository.save(clothes);
     }
-
-    @Test
-    @Transactional
-    void inputData() {
-        Company company = companyRepository.findById(1L)
-                .orElseThrow(CompanyNotFound::new);
-
-        List<Clothes> clothesList = new ArrayList<>();
-
-        Stream.of( "운동화", "스니커즈", "슬리퍼", "구두", "로퍼")
-                        .forEach(clothes -> clothesList.add(Clothes.builder()
-                                .name(clothes)
-                                .company(company)
-                                .createdBy("ImRieul")
-                                .part(SHOES)
-                                .build()));
-
-
-        clothesRepository.saveAll(clothesList);
-    }
-
-    @Test
-    void read() {
-        System.out.println(clothesRepository.findAll());
-    }
 }
