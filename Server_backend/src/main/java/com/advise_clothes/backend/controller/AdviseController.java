@@ -6,6 +6,7 @@ import com.advise_clothes.backend.exception.CompanyNotFound;
 import com.advise_clothes.backend.repository.CompanyRepository;
 import com.advise_clothes.backend.request.AdviseRequest;
 import com.advise_clothes.backend.response.ClothesResponse;
+import com.advise_clothes.backend.service.ClothesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,40 +20,10 @@ import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.*
 public class AdviseController {
 
     private final CompanyRepository companyRepository;
+    private final ClothesService clothesService;
 
     @GetMapping("")
     public List<ClothesResponse> testAdvise(@ModelAttribute AdviseRequest adviseRequest) {
-        Company company = companyRepository.findById(1L)
-                .orElseThrow(CompanyNotFound::new);
-
-        ClothesResponse top = new ClothesResponse(Clothes.builder()
-                .name("니트티")
-                .company(company)
-                .part(TOP)
-                .createdBy("admin")
-                .build());
-
-        ClothesResponse bottom = new ClothesResponse(Clothes.builder()
-                .name("슬랙스")
-                .company(company)
-                .part(BOTTOM)
-                .createdBy("admin")
-                .build());
-
-        ClothesResponse shoes = new ClothesResponse(Clothes.builder()
-                .name("운동화")
-                .company(company)
-                .part(SHOES)
-                .createdBy("admin")
-                .build());
-
-        ClothesResponse outer = new ClothesResponse(Clothes.builder()
-                .name("롱패딩")
-                .company(company)
-                .part(OUTER)
-                .createdBy("admin")
-                .build());
-
-        return List.of(top, bottom, shoes, outer);
+        return clothesService.advice(adviseRequest);
     }
 }

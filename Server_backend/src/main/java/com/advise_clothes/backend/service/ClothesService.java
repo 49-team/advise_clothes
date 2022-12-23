@@ -4,6 +4,7 @@ import com.advise_clothes.backend.domain.business.ClothesEditor;
 import com.advise_clothes.backend.domain.entity.Clothes;
 import com.advise_clothes.backend.exception.ClothesNotFound;
 import com.advise_clothes.backend.repository.ClothesRepository;
+import com.advise_clothes.backend.request.AdviseRequest;
 import com.advise_clothes.backend.request.ClothesCreate;
 import com.advise_clothes.backend.request.ClothesEdit;
 import com.advise_clothes.backend.response.ClothesResponse;
@@ -64,7 +65,7 @@ public class ClothesService {
         clothesRepository.delete(clothes);
     }
 
-    public List<ClothesResponse> advice(int temperature, String weather) {
+    public List<ClothesResponse> advice(AdviseRequest adviseRequest) {
         List<ClothesResponse> result = new ArrayList<>();
         List<String> topFilter;
         List<String> bottomFilter;
@@ -76,31 +77,31 @@ public class ClothesService {
         List<ClothesResponse> outer = new ArrayList<>();
 //        List<ClothesResponse> shoes = new ArrayList<>();
 
-        if (temperature >= 28) {
+        if (adviseRequest.getTemperature() >= 28) {
             topFilter = List.of("민소매", "반팔티", "린넨셔츠");
             bottomFilter = List.of("반바지", "짧은치마");
             outerFilter = new ArrayList<>();
-        } else if (temperature >= 23 ) {
+        } else if (adviseRequest.getTemperature() >= 23 ) {
             topFilter = List.of("반팔티", "얇은셔츠");
             bottomFilter = List.of("반바지", "면바지");
             outerFilter = new ArrayList<>();
-        } else if (temperature >= 20) {
+        } else if (adviseRequest.getTemperature() >= 20) {
             topFilter = List.of("블라우스", "긴팔티");
             bottomFilter = List.of("면바지", "슬랙스");
             outerFilter = new ArrayList<>();
-        } else if (temperature >= 17) {
+        } else if (adviseRequest.getTemperature() >= 17) {
             topFilter = List.of("니트티", "맨투맨", "후드");
             bottomFilter = List.of("긴바지");
             outerFilter = List.of("얇은가디건");
-        } else if (temperature >= 12) {
+        } else if (adviseRequest.getTemperature() >= 12) {
             topFilter = List.of("니트티", "맨투맨", "후드");
             bottomFilter = List.of("청바지");
             outerFilter = List.of("자켓", "가디건", "청자켓");
-        } else if (temperature >= 9) {
+        } else if (adviseRequest.getTemperature() >= 9) {
             topFilter = List.of("니트티", "맨투맨", "후드");
             bottomFilter = List.of("기모바지");
             outerFilter = List.of("트렌치코트", "야상", "점퍼");
-        } else if (temperature >= 5) {
+        } else if (adviseRequest.getTemperature() >= 5) {
             topFilter = List.of("니트티", "맨투맨", "후드", "기모티");
             bottomFilter = List.of("기모바지");
             outerFilter = List.of("울코트");
@@ -141,6 +142,7 @@ public class ClothesService {
         result.addAll(top);
         result.addAll(bottom);
         result.addAll(outer);
+//        result.addAll(shoes);
 
         return result;
     }

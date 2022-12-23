@@ -11,13 +11,13 @@ import lombok.Setter;
 public class AdviseRequest {
 
 //    @NotBlank(message = "기온을 입력해주세요.")
-    private String temperature;
+    private Integer temperature;
 
 //    @NotBlank(message = "날씨를 입력해주세요.")
     private String weather;
 
     @Builder
-    public AdviseRequest(String temperature, String weather) {
+    public AdviseRequest(Integer temperature, String weather) {
         this.temperature = temperature;
         this.weather = weather;
         this.validate();

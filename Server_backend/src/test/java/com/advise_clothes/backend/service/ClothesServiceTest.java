@@ -4,6 +4,7 @@ import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.domain.entity.Clothes;
 import com.advise_clothes.backend.exception.ClothesNotFound;
 import com.advise_clothes.backend.exception.InvalidRequest;
+import com.advise_clothes.backend.request.AdviseRequest;
 import com.advise_clothes.backend.request.ClothesCreate;
 import com.advise_clothes.backend.domain.entity.Company;
 import com.advise_clothes.backend.repository.ClothesRepository;
@@ -219,10 +220,14 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온이 28도 이상")
     void adviseTemperature28() {
         // given
-        int temperature = 28;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(28)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -241,10 +246,14 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 23 ~ 27도")
     void adviseTemperature23() {
         // given
-        int temperature = 23;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(23)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -263,10 +272,14 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 20 ~ 22도")
     void adviseTemperature20() {
         // given
-        int temperature = 20;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(20)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -284,10 +297,15 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 17 ~ 19도")
     void adviseTemperature17() {
         // given
-        int temperature = 17;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(17)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -304,10 +322,14 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 12 ~ 16도")
     void adviseTemperature12() {
         // given
-        int temperature = 12;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(12)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -328,10 +350,14 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 9 ~ 11도")
     void adviseTemperature9() {
         // given
-        int temperature = 9;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(9)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -351,10 +377,13 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 5 ~ 8도")
     void adviseTemperature5() {
         // given
-        int temperature = 5;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(5)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
@@ -371,10 +400,14 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     @DisplayName("옷 추천, 기온 4도 이하")
     void adviseTemperature4() {
         // given
-        int temperature = 4;
+        AdviseRequest adviseRequest = AdviseRequest.builder()
+                .temperature(4)
+                .weather("sun")
+                .build();
 
         // when
-        List<ClothesResponse> clothesResponses = clothesService.advice(temperature, "");
+        List<ClothesResponse> clothesResponses = clothesService.advice(adviseRequest);
+
 
         // then
         List<String> responseWithCheck = clothesResponses.stream()
