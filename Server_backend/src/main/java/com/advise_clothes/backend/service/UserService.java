@@ -29,6 +29,7 @@ public class UserService {
     public User create(User user) {
         // 비밀번호 소문자, 숫자, 특수문자 들어갔는지 체크
         user.setPassword(encryptPassword(user.getPassword()));
+        user.setCreatedBy(user.getAccount());
         user.setDeletedReason(0);
         return userRepository.save(user);
     }

@@ -4,6 +4,7 @@ import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.service.SessionService;
 import com.advise_clothes.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     // session check하는 private method 만들기
@@ -67,6 +69,8 @@ public class UserController {
      */
     @PostMapping("")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        log.debug("UserController.createUser : " + user);
+
         return userService.findByUserForNotDelete(user).map(value ->
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(User.builder().account(value.getAccount()).build()))
         .orElseGet(() ->
