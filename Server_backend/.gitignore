@@ -36,5 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-# mysql server
-application.properties
+# mysql server - push origin is private
+# application.properties
+
