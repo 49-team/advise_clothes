@@ -9,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.*;
+import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
 
 class ClothesRepositoryTest extends ServerBackendApplicationTests {
 
