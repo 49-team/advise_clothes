@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './Weather.scss';
+import Recommend from './Recommend';
 
 function Weather() {
 
@@ -48,9 +49,8 @@ function Weather() {
                 <h3>{Math.floor(weather.main.temp-273.15)}℃</h3>
 
                 <p>{weather.name}</p>
-
-
             </div>
+            <Recommend weather={weather} />
         </div>
     )
 }
