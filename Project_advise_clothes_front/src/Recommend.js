@@ -6,7 +6,7 @@ function Recommend(props) {
 
     return(
         <div className='con2'>옷추천
-            {/*<div>상의 : {props.weather.weather[0].main}</div>*/}
+            <div>Test : {props.weather}</div>
         </div>
 
     )
