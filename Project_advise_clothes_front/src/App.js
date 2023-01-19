@@ -5,7 +5,7 @@ import Login from "./Login/Login";
 import Signup from './Login/Signup';
 import Community from './Community';
 import Weather from './Weather';
-import Recommend from './Recommend';
+// import Recommend from './Recommend';
 import Success from './Login/Success';
 import NotFound from './NotFound';
 import Header from './Header';
@@ -13,11 +13,16 @@ import HeaderLogin from './HeaderLogin';
 import Mypage from './Login/Mypage';
 import PrivateRoute from './Login/PrivateRoute';
 import PublicRoute from './Login/PublicRoute';
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useCookies } from "react-cookie";
 import isLogin from './Login/isLogin';
 import axios from "axios";
 import './Weather.scss';
+import './Recommend.css';
+
+import { createContext } from 'react';
+
+export const WeatherContext = createContext();
 
 function App() {
     const [cookies, setCookies, removeCookie] = useCookies(['info', 'auth']);
@@ -27,6 +32,9 @@ function App() {
 
     const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
+
+    // const weathers = useContext(WeatherContext);
+
 
     useEffect(() => {
         const fetch = async() => {
@@ -70,6 +78,7 @@ function App() {
                 <Switch>
                     <Route path="/" exact>
                         {/*<Weather/>*/}
+                        {/*<WeatherContext.Provider value={weather}>*/}
                         <div className='con1'>날씨
 
                             <div className="weather">
@@ -81,9 +90,14 @@ function App() {
 
                                 <p>{weather.name}</p>
                             </div>
-                            <Recommend weather={weather} />
+                            {/*<Recommend weather={weather} />*/}
                         </div>
-                        <Recommend/>
+                        {/*</WeatherContext.Provider>*/}
+                        {/*<Recommend/>*/}
+                        <div className='con2'>옷추천
+                            {/*<div>Test : {props.weather}</div>*/}
+                            <div>Test : {weather.weather[0].main}</div>
+                        </div>
                     </Route>
 
                     <PublicRoute path="/login" component={Login}/>
@@ -111,5 +125,11 @@ function App() {
     );
 }
 
-
+// function Recommend() {
+//
+//     return(
+//
+//
+//     )
+// }
 export default App;
