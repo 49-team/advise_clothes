@@ -35,6 +35,7 @@ function App() {
 
     // const weathers = useContext(WeatherContext);
 
+    const [clothes, setClothes] = useState(null);
 
     useEffect(() => {
         const fetch = async() => {
@@ -49,6 +50,14 @@ function App() {
                 );
                 setWeather(response.data);
                 setIcon(response.data.weather[0].icon)
+
+                let temp = (Math.floor(response.data.main.temp-273.15))
+                let weather_nal = response.data.weather[0].main;
+
+                const result = await axios.get(
+                    `http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:8080/api/advise?temperature=${temp}&weather=${weather_nal}`
+                );
+                setClothes(result.data);
             } catch(e) {
                 setError(e);
             }
@@ -61,7 +70,7 @@ function App() {
     if (error) return <div>에러!</div>
     if (!weather) return null;
     if (!icon) return null;
-    
+
     return (
         <div className="App">
             <header>
@@ -95,8 +104,10 @@ function App() {
                         {/*</WeatherContext.Provider>*/}
                         {/*<Recommend/>*/}
                         <div className='con2'>옷추천
-                            {/*<div>Test : {props.weather}</div>*/}
-                            <div>Test : {weather.weather[0].main}, {Math.floor(weather.main.temp-273.15)}도</div>
+                            <p/>
+                            <div>상의 : {clothes[0].name}, {clothes[1].name}, {clothes[2].name}, {clothes[3].name}</div>
+                            <div>하의 : {clothes[4].name}</div>
+                            <div>외투 : {clothes[5].name}, {clothes[6].name}</div>
                         </div>
                     </Route>
 
