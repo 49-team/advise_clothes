@@ -34,7 +34,7 @@ div.login {
     color: black;
   }
   button {
-    margin-top: 15px;
+    margin-top: 25px;
     height: 40px;
     width: 100px;
     background: #fff;
@@ -44,5 +44,5 @@ div.login {
 
 @media screen and (max-width: 991px)
 {
-  .login {width: 80%; height: 40%;}
+  .login {width: 90%; height: 40%;}
 }
