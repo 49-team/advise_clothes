@@ -96,7 +96,7 @@ function App() {
                         {/*<Recommend/>*/}
                         <div className='con2'>옷추천
                             {/*<div>Test : {props.weather}</div>*/}
-                            <div>Test : {weather.weather[0].main}</div>
+                            <div>Test : {weather.weather[0].main}, {Math.floor(weather.main.temp-273.15)}도</div>
                         </div>
                     </Route>
 
