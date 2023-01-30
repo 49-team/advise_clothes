@@ -41,6 +41,7 @@ function App() {
     const [bottom, setBottom] = useState([]);
     const [outer, setOuter] = useState([]);
     const [shoes, setShoes] = useState([]);
+    const [clothes, setClothes] = useState([]);
 
     useEffect(() => {
         const fetch = async() => {
@@ -67,6 +68,8 @@ function App() {
                 const result = await axios.get(
                     `http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:8080/api/advise?temperature=${temp}&weather=${weather_nal}`
                 );
+                
+                setClothes(result.data);
                 setTop(result.data.filter(item => item.part === "TOP"));
                 setBottom(result.data.filter(item => item.part === "BOTTOM"));
                 setOuter(result.data.filter(item => item.part === "OUTER"));
@@ -119,10 +122,10 @@ function App() {
                             <p/>
                             {/*part마다(TOP,BOTTOM,OUTER 등) name나누기*/}
                             {/*TOP*/}
-                            상의 : {top.map((item, index) => (
+                            상의 : {clothes.filter(x => x.part === "TOP").map((item, index, arr) => (
                                 <React.Fragment key={item.name}>
                                     <span style={{ display: 'inline-block' }}>{item.name}</span>
-                                    {index !== top.length - 1 && " / "}
+                                    {index !== arr.length - 1 && " / "}
                                 </React.Fragment>
                             ))}
                             {/*BOTTOM*/}
