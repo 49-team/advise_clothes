@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46ba6331-d2ba-4e30-b7c9-707bdd90e368" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Recommend.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recommend.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +50,8 @@
       <workItem from="1672112665444" duration="386000" />
       <workItem from="1672113085466" duration="4050000" />
       <workItem from="1672144927853" duration="19000" />
-      <workItem from="1673933172785" duration="36017000" />
+      <workItem from="1673933172785" duration="36646000" />
+      <workItem from="1674974719875" duration="10802000" />
     </task>
     <servers />
   </component>

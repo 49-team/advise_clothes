@@ -35,7 +35,12 @@ function App() {
 
     // const weathers = useContext(WeatherContext);
 
-    const [clothes, setClothes] = useState(null);
+    // filter()함수가 안 먹혀서(?) part마다 state 생성...
+    // 뭔가 비효율적이다! 코드를 다시 한 번 생각해보자!!
+    const [top, setTop] = useState([]);
+    const [bottom, setBottom] = useState([]);
+    const [outer, setOuter] = useState([]);
+    const [shoes, setShoes] = useState([]);
 
     useEffect(() => {
         const fetch = async() => {
@@ -44,6 +49,11 @@ function App() {
                 setIcon(null);
                 setError(null);
                 setLoading(true);
+
+                setTop(null);
+                setBottom(null);
+                setOuter(null);
+                setShoes(null);
 
                 const response = await axios.get(
                     'https://api.openweathermap.org/data/2.5/weather?q=seoul&lang=kr&appid=4b48e343728fa30415f6df25157c0e0e'
@@ -57,7 +67,10 @@ function App() {
                 const result = await axios.get(
                     `http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:8080/api/advise?temperature=${temp}&weather=${weather_nal}`
                 );
-                setClothes(result.data);
+                setTop(result.data.filter(item => item.part === "TOP"));
+                setBottom(result.data.filter(item => item.part === "BOTTOM"));
+                setOuter(result.data.filter(item => item.part === "OUTER"));
+                setShoes(result.data.filter(item => item.part === "SHOES"));
             } catch(e) {
                 setError(e);
             }
@@ -99,16 +112,45 @@ function App() {
 
                                 <p>{weather.name}</p>
                             </div>
-                            {/*<Recommend weather={weather} />*/}
                         </div>
-                        {/*</WeatherContext.Provider>*/}
+
                         {/*<Recommend/>*/}
                         <div className='con2'>옷추천
                             <p/>
-                            <div>상의 : {clothes[0].name}, {clothes[1].name}, {clothes[2].name}, {clothes[3].name}</div>
-                            <div>하의 : {clothes[4].name}</div>
-                            <div>외투 : {clothes[5].name}, {clothes[6].name}</div>
+                            {/*part마다(TOP,BOTTOM,OUTER 등) name나누기*/}
+                            {/*TOP*/}
+                            상의 : {top.map((item, index) => (
+                                <React.Fragment key={item.name}>
+                                    <span style={{ display: 'inline-block' }}>{item.name}</span>
+                                    {index !== top.length - 1 && " / "}
+                                </React.Fragment>
+                            ))}
+                            {/*BOTTOM*/}
+                            <p/>
+                            하의 : {bottom.map((item, index) => (
+                                <React.Fragment key={item.name}>
+                                    <span style={{ display: 'inline-block' }}>{item.name}</span>
+                                    {index !== bottom.length - 1 && " / "}
+                                </React.Fragment>
+                            ))}
+                            {/*OUTER*/}
+                            <p/>
+                            외투 : {outer.map((item, index) => (
+                                <React.Fragment key={item.name}>
+                                    <span style={{ display: 'inline-block' }}>{item.name}</span>
+                                    {index !== outer.length - 1 && " / "}
+                                </React.Fragment>
+                            ))}
+                            {/*/!*SHOES*!/*/}
+                            {/*<p/>*/}
+                            {/*신발 : {shoes.map((item, index) => (*/}
+                            {/*    <React.Fragment key={item.name}>*/}
+                            {/*        <span style={{ display: 'inline-block' }}>{item.name}</span>*/}
+                            {/*        {index !== shoes.length - 1 && " / "}*/}
+                            {/*    </React.Fragment>*/}
+                            {/*))}*/}
                         </div>
+
                     </Route>
 
                     <PublicRoute path="/login" component={Login}/>
