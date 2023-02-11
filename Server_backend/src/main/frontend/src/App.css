@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+body {
+  font-family: "nanumsquare";
+}
+
+.content {
+  height: 96vh;
+  background: #afc2cb;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  justify-content: space-between;
+}
+
+.footer {
+  background: #282c34;
+  color: white;
+  height: 4vh;
+}
+
+@media screen and (max-width: 991px)
+{
+  .d-flex {flex-direction: column; flex-wrap: wrap; align-content: center;}
+}

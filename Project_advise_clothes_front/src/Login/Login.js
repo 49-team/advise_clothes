@@ -16,7 +16,8 @@ function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const HOSTNAME = window.location.hostname + ":8080";
+        // const HOSTNAME = window.location.hostname + ":8080";
+        const HOSTNAME = "52.79.195.60:8080";
         const PROTOCOL = 'http'
 
         const fetch = async() => {
@@ -34,20 +35,21 @@ function Login() {
                 }
 
                 const reqSessionBody = {
-                    "platform" : "BROWSER",
+                    "platform" : "BROWSR",
                     "user" : {
                         "id" : resUser.data.id
                     }
                 }
 
-                const resSession = await axios.post(
-                    `${PROTOCOL}://${HOSTNAME}/api/session`, reqSessionBody
-                    // `/api/session`, reqSessionBody
-                )
+                // const resSession = await axios.post(
+                //     `${PROTOCOL}://${HOSTNAME}/api/session`, reqSessionBody
+                //     // `/api/session`, reqSessionBody
+                // )
 
                 setCookies('info', resUser.data);
-                setCookies('auth', resSession.data.sessionKey);
-                window.localStorage.setItem("account", JSON.stringify(resUser.data));
+                setCookies('auth', resUser.data);       // Session 복구 전까지 사용
+                // setCookies('auth', resSession.data.sessionKey);
+                // window.localStorage.setItem("account", JSON.stringify(resUser.data));    cookie 활용을 위해 제거
 
                 return window.location.replace("/");
             } catch (e) //호출 실패시

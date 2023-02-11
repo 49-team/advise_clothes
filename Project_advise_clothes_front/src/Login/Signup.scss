@@ -1,5 +1,5 @@
 .sign {
-  margin: 90px auto;
+  margin: auto;
   padding-top: 30px;
   background: #eee;
   height: 500px;
@@ -34,4 +34,9 @@ div.sign {
     width: 100px;
     background: #fff;
   }
+}
+
+@media screen and (max-width: 991px)
+{
+  .sign {width: 90%; height: 70%;}
 }
