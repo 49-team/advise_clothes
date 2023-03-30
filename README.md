@@ -24,7 +24,7 @@
 
 ---
 
-### 사용 언어
+### 사용 언어 & 도구
 
 #### FrontEnd
 ![React](https://img.shields.io/badge/React-53C1DE?&logo=react&logoColor=white)
