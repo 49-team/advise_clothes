@@ -17,10 +17,10 @@
 
 ### 기여자
 
-|Name|Github|Position|Documents|
-|---|---|---|---|
-|김동건| [ImRieul](https://github.com/ImRieul/advise_clothes_public/commits?author=ImRieul)|[백엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Server_backend)|
-|배주영| [Baeju0](https://github.com/ImRieul/advise_clothes_public/commits?author=Baeju0) <img src="https://avatars.githubusercontent.com/u/83051136?v=4" width="50" height="50"/> |[프론트엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Project_advise_clothes_front)|[Notion Link](https://superb-wind-615.notion.site/React-Advise-Clothes-9845cddac08d4629ac989025de8c7e92)
+| Name | Github | Position Directory | Commit Log | Documents |
+|---|---|---|---|---|
+| 김동건 | [ImRieul](https://github.com/ImRieul) | [백엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Server_backend)| [ImRieul Commit](https://github.com/ImRieul/advise_clothes_public/commits?author=ImRieul) |
+|배주영| [Baeju0](https://github.com/Baeju0) <img src="https://avatars.githubusercontent.com/u/83051136?v=4" width="50" height="50"/> |[프론트엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Project_advise_clothes_front) | [Baeju0 Commit](https://github.com/ImRieul/advise_clothes_public/commits?author=Baeju0) |[Notion Link](https://superb-wind-615.notion.site/React-Advise-Clothes-9845cddac08d4629ac989025de8c7e92)
 
 ---
 
