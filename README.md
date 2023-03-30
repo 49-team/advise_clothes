@@ -45,3 +45,4 @@
 ![Github](https://img.shields.io/badge/Github-000000?logo=Github)
 ![Microsoft Azure](https://img.shields.io/badge/Microsoft%20Azure-0078D4?logo=MicrosoftAzure&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=Docker&logoColor=white)
+![AWS EC2](https://img.shields.io/badge/AWS%20EC2-232F3E?logo=AmazonAWS&logoColor=white)
