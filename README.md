@@ -2,9 +2,6 @@
 옷 추천 서비스
 
 
-### 서비스 링크
-> [Advise Clothes](http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com)
-
 ---
 
 ### 테스트용 계정
