@@ -4,14 +4,6 @@
 
 ---
 
-### 테스트용 계정
-
-|ID|Password|
-|---|---|
-|testAccount002|p002|
-
----
-
 ### 기여자
 
 | Name | Github | Position Directory | Commit Log | Documents |
