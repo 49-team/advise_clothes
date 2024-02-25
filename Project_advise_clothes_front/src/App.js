@@ -66,7 +66,7 @@ function App() {
                 let weather_nal = response.data.weather[0].main;
 
                 const result = await axios.get(
-                    `http://ec2-52-79-195-60.ap-northeast-2.compute.amazonaws.com:8080/api/advise?temperature=${temp}&weather=${weather_nal}`
+	                    `${process.env.REACT_APP_BACKEND_URL}/api/advise?temperature=${temp}&weather=${weather_nal}`
                 );
                 
                 setClothes(result.data);

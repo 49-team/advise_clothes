@@ -16,15 +16,12 @@ function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // const HOSTNAME = window.location.hostname + ":8080";
-        const HOSTNAME = "52.79.195.60:8080";
-        const PROTOCOL = 'http'
 
         const fetch = async() => {
             try {
 
                 const resUser = await axios.get(
-                    `${PROTOCOL}://${HOSTNAME}/api/users?account=${account}&password=${password}`);
+                    `${process.env.REACT_APP_BACKEND_URL}/api/users?account=${account}&password=${password}`);
                     // `/api/users?account=${account}&password=${password}`);
                 // setConfirmAccount(resUser.data.account);
                 // setConfirmPasswords(resUser.data.password);

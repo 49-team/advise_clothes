@@ -19,7 +19,8 @@ function Mypage() {
     const [phoneError, setPhoneError] = useState(false);
     const [removeInputError, setRemoveInputError] = useState(false);
 
-    const URL = `http://52.79.195.60:8080/api/users/${cookies.info.account}`;
+    // const URL = `http://52.79.195.60:8080/api/users/${cookies.info.account}`;
+	const URL = `${process.env.REACT_APP_BACKEND_URL}/api/users/${cookies.info.account}`;
 
     const onNickChangeHandler = (e) => {
         setNickChange(e.target.value);
