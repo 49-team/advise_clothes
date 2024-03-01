@@ -1,6 +1,9 @@
 # advise_clothes
-옷 추천 서비스
+> 옷 추천 서비스
 
+- 점심시간에 항상 고민하는 ‘오늘 뭐 먹지?’, 아침시간에 항상 고민하는 건 ‘오늘 뭐 입지?’ 날씨와 스타일을 기반으로 입을 옷을 추천해주는 웹 서비스 프로젝트입니다.
+- 이전에 했던 프로젝트인 [옷 추천 서비스](https://github.com/Baeju0/TeamProject_advice)를 Front(React), Back(Spring boot)로 재구성한 프로젝트입니다.
+- FrontEnd 1명 + BackEnd 1명이 Github로 협업하며 구현하였습니다.
 
 ---
 
@@ -8,8 +11,8 @@
 
 | Name | Github | Position Directory | Commit Log | Documents |
 |---|---|---|---|---|
-| 김동건 | [ImRieul](https://github.com/ImRieul) | [백엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Server_backend)| [ImRieul Commit](https://github.com/ImRieul/advise_clothes_public/commits?author=ImRieul) |
-|배주영| [Baeju0](https://github.com/Baeju0) <img src="https://avatars.githubusercontent.com/u/83051136?v=4" width="50" height="50"/> |[프론트엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Project_advise_clothes_front) | [Baeju0 Commit](https://github.com/ImRieul/advise_clothes_public/commits?author=Baeju0) |[Notion Link](https://superb-wind-615.notion.site/React-Advise-Clothes-9845cddac08d4629ac989025de8c7e92)
+| 김동건 | [ImRieul](https://github.com/ImRieul) <img src="https://avatars.githubusercontent.com/u/82865792?v=4" width="50" height="50" />| [백엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Server_backend)| [ImRieul Commit](https://github.com/ImRieul/advise_clothes_public/commits?author=ImRieul) |
+| 배주영 | [Baeju0](https://github.com/Baeju0) <img src="https://avatars.githubusercontent.com/u/83051136?v=4" width="50" height="50"/> |[프론트엔드](https://github.com/ImRieul/advise_clothes_public/tree/public/Project_advise_clothes_front) | [Baeju0 Commit](https://github.com/ImRieul/advise_clothes_public/commits?author=Baeju0) |[Notion Link](https://superb-wind-615.notion.site/React-Advise-Clothes-9845cddac08d4629ac989025de8c7e92)
 
 ---
 
