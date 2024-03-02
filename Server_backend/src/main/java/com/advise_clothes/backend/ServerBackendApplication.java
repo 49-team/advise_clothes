@@ -18,7 +18,7 @@ public class ServerBackendApplication implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                // TODO: 개발용, 서버용 따로 나누기
+//                 TODO: 개발용, 서버용 따로 나누기
                 .allowedOrigins(
                         "http://localhost:3000",
                         "https://web-advise-clothes-front-am952nlt1gbj1t.sel5.cloudtype.app"
