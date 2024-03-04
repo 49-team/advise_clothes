@@ -25,5 +25,4 @@ public class ServerBackendApplication implements WebMvcConfigurer {
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
-
 }
