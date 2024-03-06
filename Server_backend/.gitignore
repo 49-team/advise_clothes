@@ -39,3 +39,4 @@ out/
 # mysql server - push origin is private
 # application.properties
 
+*/.idea/*

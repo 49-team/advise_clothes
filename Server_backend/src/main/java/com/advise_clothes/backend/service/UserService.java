@@ -90,7 +90,8 @@ public class UserService {
      */
     public Optional<User> findByUserForNotDelete(User user, String password) {
         user.setNickname(null);     // nickName으론 검색 X
-        return findByUser(user).filter(value -> (encryption.matches(password, value.getPassword()) && value.getDeletedReason() == NO_DELETE));
+        Optional<User> resultUser = findByUser(user).filter(value -> (encryption.matches(password, value.getPassword()) && value.getDeletedReason() == NO_DELETE));
+        return resultUser;
 
         // 위에 코드가 잘 작동하면 삭제
 //        return findByUser(user).map(value -> userRepository.findByIdAndPasswordAndDeletedReason(value.getId(), encryptPassword(password), NO_DELETE))

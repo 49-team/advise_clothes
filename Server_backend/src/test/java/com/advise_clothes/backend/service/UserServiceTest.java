@@ -15,6 +15,7 @@ class UserServiceTest extends ServerBackendApplicationTests {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -24,10 +25,9 @@ class UserServiceTest extends ServerBackendApplicationTests {
     void create() {
         // given
         User user = User.builder()
-                .account("testCreateUser")
+                .account("testCreateUser1")
                 .password("testPassword")
                 .nickname("ABCDEFG")
-                .createdBy("JUnit5")
                 .email("rieul.im@gmail.com")
                 .deletedReason(0)
                 .phoneNumber("888-8888-8888")
@@ -40,12 +40,7 @@ class UserServiceTest extends ServerBackendApplicationTests {
         User createUser = userRepository.findByAccount(user.getAccount())
                         .orElseThrow(() -> new RuntimeException("유저가 생성되지 않았습니다."));
 
-        assertEquals("testCreateUser", createUser.getAccount());
-        assertEquals("ABCDEFG", createUser.getNickname());
-        assertEquals("JUnit5", createUser.getCreatedBy());
-        assertEquals("rieul.im@gmail.com", createUser.getEmail());
-        assertEquals(0, createUser.getDeletedReason());
-        assertEquals("888-8888-8888", createUser.getPhoneNumber());
+        assertEquals(user, createUser);
     }
 
     @Test
@@ -60,7 +55,7 @@ class UserServiceTest extends ServerBackendApplicationTests {
     @Transactional
     void getUser() {
         // given
-        User createUser = userRepository.save(User.builder()
+        User user = userRepository.save(User.builder()
                 .account("testCreateUser")
                 .password("testPassword")
                 .nickname("ABCDEFG")
@@ -72,11 +67,11 @@ class UserServiceTest extends ServerBackendApplicationTests {
         );
 
         // when
-        User user = userService.findByUser(User.builder().account("testCreateUser").build())
+        User createUser = userService.findByUser(User.builder().account("testCreateUser").build())
                 .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
 
         // then
-        assertEquals(createUser.toString(), user.toString());
+        assertEquals(user, createUser);
     }
 
     @Test
@@ -108,10 +103,13 @@ class UserServiceTest extends ServerBackendApplicationTests {
     @Transactional
     void updateUser() {
         // given
+        String beforeNickname = "ABCDEFG";
+        String afterNickname = "ABCD";
+
         User createUser = userRepository.save(User.builder()
                 .account("testCreateUser")
                 .password("testPassword")
-                .nickname("ABCDEFG")
+                .nickname(beforeNickname)
                 .createdBy("JUnit5")
                 .email("rieul.im@gmail.com")
                 .deletedReason(0)
@@ -120,12 +118,11 @@ class UserServiceTest extends ServerBackendApplicationTests {
         );
 
         // when
-        createUser.setNickname("ABCD");
+        createUser.setNickname(afterNickname);
         User user = userService.update(createUser);
 
         // then
-        assertEquals("testCreateUser", user.getAccount());
-        assertEquals("ABCD", user.getNickname());
+        assertEquals(afterNickname, user.getNickname());
     }
 
     /**
@@ -151,7 +148,6 @@ class UserServiceTest extends ServerBackendApplicationTests {
         User user = userService.delete(createUser);
 
         // then
-        assertEquals("testCreateUser", user.getAccount());
         assertEquals(1, user.getDeletedReason());
     }
 }

@@ -13,12 +13,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Builder
 @ToString
 public class User extends BaseEntity {
 
@@ -32,16 +32,27 @@ public class User extends BaseEntity {
     private Integer height;
     private Integer weight;
 
-    private String createdBy;
-    private String updatedBy;
     private Integer deletedReason;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @ToString.Exclude
 //    @JsonBackReference
     @JsonIgnore
-    @Builder.Default
+//    @Builder.Default
     private List<Session> sessionList = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(account, user.account);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(account);
+    }
 
     @Builder
     public User(String account, String password, String nickname, String email, String phoneNumber, Integer gender, String area, Integer height, Integer weight, String createdBy, String updatedBy, Integer deletedReason, List<Session> sessionList) {
