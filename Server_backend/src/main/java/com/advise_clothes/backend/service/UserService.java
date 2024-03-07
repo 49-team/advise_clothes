@@ -35,7 +35,7 @@ public class UserService {
     }
 
     /**
-     * 로그인 - 삭제 필요
+     * 로그인
      * @param user 'account' and 'password'가 들어있는 User 객체
      * @return
      */
@@ -65,37 +65,12 @@ public class UserService {
      * @author 임리을
      */
     public Optional<User> findByUserForNotDelete(User user) {
-        // nickname으론 검색 x
         User userToFind = User.builder()
-//                .id(user.getId())
                 .account(user.getAccount())
                 .phoneNumber(user.getPhoneNumber())
                 .email(user.getEmail())
                 .build();
         return findByUser(userToFind).filter(value -> value.getDeletedReason() == NO_DELETE);
-
-        // 위에 코드가 잘 작동하면 삭제
-//        return user.getId() != null ? userRepository.findByIdAndDeletedReason(user.getId(), NO_DELETE) :
-//                user.getAccount() != null ? userRepository.findByAccountAndDeletedReason(user.getAccount(), NO_DELETE) :
-//                user.getPhoneNumber() != null ? userRepository.findByPhoneNumberAndDeletedReason(user.getPhoneNumber(), NO_DELETE) :
-//                user.getEmail() != null ? userRepository.findByEmailAndDeletedReason(user.getEmail(), NO_DELETE) :
-//                Optional.empty();
-    }
-
-    /**
-     * (account or phoneNumber or email) and password로 계정 찾기 -> 로그인
-     * @param user 'account' or 'phoneNumber' or 'email' 중 하나가 들어있는 User
-     * @param password 비밀번호(필수)
-     * @return 검색 결과
-     */
-    public Optional<User> findByUserForNotDelete(User user, String password) {
-        user.setNickname(null);     // nickName으론 검색 X
-        Optional<User> resultUser = findByUser(user).filter(value -> (encryption.matches(password, value.getPassword()) && value.getDeletedReason() == NO_DELETE));
-        return resultUser;
-
-        // 위에 코드가 잘 작동하면 삭제
-//        return findByUser(user).map(value -> userRepository.findByIdAndPasswordAndDeletedReason(value.getId(), encryptPassword(password), NO_DELETE))
-//                .orElseGet(Optional::empty);
     }
 
     /**

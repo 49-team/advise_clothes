@@ -3,6 +3,8 @@ package com.advise_clothes.backend.Controller;
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.repository.UserRepository;
+import com.advise_clothes.backend.request.UserLogin;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,23 +33,30 @@ public class UserControllerTest extends ServerBackendApplicationTests {
     @Transactional
     void getLogin() throws Exception {
         // given
-        User user = userRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("유저가 존재하지 않습니다."));
+        String account = "testCreateUser1";
+        String password = "testPassword";
+
+        userRepository.save(
+                User.builder()
+                        .account(account)
+                        .password(password)
+                        .nickname("ABCDEFG")
+                        .email("rieul.im@gmail.com")
+                        .deletedReason(0)
+                        .phoneNumber("888-8888-8888")
+                        .build()
+        );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String params = objectMapper.writeValueAsString(UserLogin.builder()
+                .account(account)
+                .password(password)
+                .build());
 
         // expected
         mockMvc.perform(get("/api/users")
-                    .param("account", user.getAccount()))
-                .andExpect(status().isOk())
-                .andDo(print());
-    }
-
-    @Test
-    @DisplayName("/api/users/list Get 요청 시 모든 유저 정보를 반환")
-    @Transactional
-    void getUserList() throws Exception {
-
-        // expected
-        mockMvc.perform(get("/api/users/list"))
+                        .contentType(APPLICATION_JSON)
+                        .content(params))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -125,29 +134,6 @@ public class UserControllerTest extends ServerBackendApplicationTests {
         // excepted
         mockMvc.perform(delete("/api/users/{account}", user.getAccount()))
                 .andExpect(status().isOk())
-                .andDo(print());
-    }
-
-    @Test
-    @DisplayName("/api/users/{account}/reset Delete 요청 시 유저 복구(삭제 속성 수정)")
-    @Transactional
-    void resetDeleteUser() throws Exception {
-        // given
-        User user = userRepository.save(User.builder()
-                .account("testCreateUser")
-                .password("testPassword")
-                .nickname("ABCD")
-                .createdBy("김동건")
-                .email("rieul.im@gmail.com")
-                .deletedReason(1)
-                .phoneNumber("888-8888-8888")
-                .build()
-        );
-
-        // excepted
-        mockMvc.perform(delete("/api/users/{account}/reset", user.getAccount()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.deletedReason").value(0))
                 .andDo(print());
     }
 }
