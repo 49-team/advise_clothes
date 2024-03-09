@@ -1,17 +1,17 @@
 package com.advise_clothes.backend.service;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.domain.entity.Clothes;
+import com.advise_clothes.backend.clothes.entity.Clothes;
 import com.advise_clothes.backend.exception.ClothesNotFound;
 import com.advise_clothes.backend.exception.InvalidRequest;
-import com.advise_clothes.backend.request.AdviseRequest;
-import com.advise_clothes.backend.request.ClothesCreate;
-import com.advise_clothes.backend.domain.entity.Company;
-import com.advise_clothes.backend.repository.ClothesRepository;
-import com.advise_clothes.backend.repository.CompanyRepository;
-import com.advise_clothes.backend.request.ClothesEdit;
-import com.advise_clothes.backend.response.ClothesResponse;
-import com.advise_clothes.backend.service.impl.ClothesServiceImpl;
+import com.advise_clothes.backend.advise.dto.AdviseRequest;
+import com.advise_clothes.backend.clothes.dto.ClothesCreate;
+import com.advise_clothes.backend.company.entity.Company;
+import com.advise_clothes.backend.clothes.repository.ClothesRepository;
+import com.advise_clothes.backend.company.repository.CompanyRepository;
+import com.advise_clothes.backend.clothes.dto.ClothesEdit;
+import com.advise_clothes.backend.clothes.dto.ClothesResponse;
+import com.advise_clothes.backend.clothes.service.impl.ClothesServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,7 +20,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
+import static com.advise_clothes.backend.clothes.entity.Clothes.ClothesPartEnum.TOP;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClothesServiceImplTest extends ServerBackendApplicationTests {

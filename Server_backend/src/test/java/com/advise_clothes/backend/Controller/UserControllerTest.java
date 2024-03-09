@@ -1,9 +1,9 @@
 package com.advise_clothes.backend.Controller;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.domain.entity.User;
-import com.advise_clothes.backend.repository.UserRepository;
-import com.advise_clothes.backend.request.UserLogin;
+import com.advise_clothes.backend.user.entity.User;
+import com.advise_clothes.backend.user.repository.UserRepository;
+import com.advise_clothes.backend.user.dto.UserLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

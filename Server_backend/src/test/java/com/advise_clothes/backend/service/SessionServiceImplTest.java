@@ -1,11 +1,11 @@
 package com.advise_clothes.backend.service;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.domain.entity.Session;
-import com.advise_clothes.backend.domain.entity.User;
-import com.advise_clothes.backend.repository.SessionRepository;
-import com.advise_clothes.backend.repository.UserRepository;
-import com.advise_clothes.backend.service.impl.SessionServiceImpl;
+import com.advise_clothes.backend.session.entity.Session;
+import com.advise_clothes.backend.user.entity.User;
+import com.advise_clothes.backend.session.repository.SessionRepository;
+import com.advise_clothes.backend.user.repository.UserRepository;
+import com.advise_clothes.backend.session.service.impl.SessionServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 

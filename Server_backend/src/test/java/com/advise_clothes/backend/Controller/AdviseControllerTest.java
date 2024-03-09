@@ -1,7 +1,7 @@
 package com.advise_clothes.backend.Controller;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.request.AdviseRequest;
+import com.advise_clothes.backend.advise.dto.AdviseRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

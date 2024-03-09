@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46ba6331-d2ba-4e30-b7c9-707bdd90e368" name="변경" comment="" />
+    <list default="true" id="46ba6331-d2ba-4e30-b7c9-707bdd90e368" name="변경" comment="백엔드 서버를 전역변수로 설정">
+      <change beforePath="$PROJECT_DIR$/.idea/Project_advise_clothes_front.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project_advise_clothes_front.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server_backend/src/main/java/com/advise_clothes/backend/controller/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server_backend/src/main/java/com/advise_clothes/backend/controller/SessionController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +20,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2JTnsQYNbGEaD2MMC8iAFyZA0l8" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -26,7 +33,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "public",
+    "git-widget-placeholder": "develop/#6-refactoring-function-now",
     "last_opened_file_path": "/Users/DongGeon_KIm/programming/advise_clothes_public/Project_advise_clothes_front",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -53,6 +60,8 @@
       <workItem from="1673933172785" duration="36646000" />
       <workItem from="1674974719875" duration="10802000" />
       <workItem from="1682953990239" duration="191000" />
+      <workItem from="1709652507671" duration="1244000" />
+      <workItem from="1709826353356" duration="617000" />
     </task>
     <servers />
   </component>

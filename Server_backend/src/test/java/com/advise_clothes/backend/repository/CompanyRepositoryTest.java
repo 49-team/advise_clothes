@@ -1,7 +1,8 @@
 package com.advise_clothes.backend.repository;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.domain.entity.Company;
+import com.advise_clothes.backend.company.entity.Company;
+import com.advise_clothes.backend.company.repository.CompanyRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

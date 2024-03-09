@@ -1,13 +1,13 @@
 package com.advise_clothes.backend.Controller;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
-import com.advise_clothes.backend.domain.entity.Clothes;
-import com.advise_clothes.backend.domain.entity.Company;
+import com.advise_clothes.backend.clothes.entity.Clothes;
+import com.advise_clothes.backend.company.entity.Company;
 import com.advise_clothes.backend.exception.ClothesNotFound;
-import com.advise_clothes.backend.repository.ClothesRepository;
-import com.advise_clothes.backend.repository.CompanyRepository;
-import com.advise_clothes.backend.request.ClothesCreate;
-import com.advise_clothes.backend.request.ClothesEdit;
+import com.advise_clothes.backend.clothes.repository.ClothesRepository;
+import com.advise_clothes.backend.company.repository.CompanyRepository;
+import com.advise_clothes.backend.clothes.dto.ClothesCreate;
+import com.advise_clothes.backend.clothes.dto.ClothesEdit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
 
-import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
+import static com.advise_clothes.backend.clothes.entity.Clothes.ClothesPartEnum.TOP;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
