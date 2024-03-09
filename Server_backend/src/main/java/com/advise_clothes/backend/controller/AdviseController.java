@@ -3,7 +3,7 @@ package com.advise_clothes.backend.controller;
 import com.advise_clothes.backend.repository.CompanyRepository;
 import com.advise_clothes.backend.request.AdviseRequest;
 import com.advise_clothes.backend.response.ClothesResponse;
-import com.advise_clothes.backend.service.ClothesService;
+import com.advise_clothes.backend.service.impl.ClothesServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +18,7 @@ import java.util.List;
 public class AdviseController {
 
     private final CompanyRepository companyRepository;
-    private final ClothesService clothesService;
+    private final ClothesServiceImpl clothesService;
 
     @GetMapping("")
     public List<ClothesResponse> testAdvise(@ModelAttribute AdviseRequest adviseRequest) {

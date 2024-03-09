@@ -11,6 +11,7 @@ import com.advise_clothes.backend.repository.ClothesRepository;
 import com.advise_clothes.backend.repository.CompanyRepository;
 import com.advise_clothes.backend.request.ClothesEdit;
 import com.advise_clothes.backend.response.ClothesResponse;
+import com.advise_clothes.backend.service.impl.ClothesServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.TOP;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ClothesServiceTest extends ServerBackendApplicationTests {
+class ClothesServiceImplTest extends ServerBackendApplicationTests {
 
     @Autowired
     private ClothesRepository clothesRepository;
@@ -31,7 +32,7 @@ class ClothesServiceTest extends ServerBackendApplicationTests {
     private CompanyRepository companyRepository;
 
     @Autowired
-    private ClothesService clothesService;
+    private ClothesServiceImpl clothesService;
 
     private Company company;
 

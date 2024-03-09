@@ -3,7 +3,7 @@ package com.advise_clothes.backend.controller;
 import com.advise_clothes.backend.request.ClothesCreate;
 import com.advise_clothes.backend.request.ClothesEdit;
 import com.advise_clothes.backend.response.ClothesResponse;
-import com.advise_clothes.backend.service.ClothesService;
+import com.advise_clothes.backend.service.impl.ClothesServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class ClothesController {
 
-    private final ClothesService clothesService;
+    private final ClothesServiceImpl clothesService;
 
     @PostMapping("")
     public void post(@RequestBody @Valid ClothesCreate request) {

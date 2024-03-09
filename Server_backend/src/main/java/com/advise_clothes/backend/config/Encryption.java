@@ -1,10 +1,11 @@
-package com.advise_clothes.backend.service.security;
+package com.advise_clothes.backend.config;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+
+@Component
 public class Encryption implements PasswordEncoder {
 
     @Override

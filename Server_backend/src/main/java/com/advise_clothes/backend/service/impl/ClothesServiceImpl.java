@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.service;
+package com.advise_clothes.backend.service.impl;
 
 import com.advise_clothes.backend.domain.business.ClothesEditor;
 import com.advise_clothes.backend.domain.entity.Clothes;
@@ -20,7 +20,7 @@ import static com.advise_clothes.backend.domain.entity.Clothes.ClothesPartEnum.*
 
 @Service
 @RequiredArgsConstructor
-public class ClothesService {
+public class ClothesServiceImpl {
 
     private final ClothesRepository clothesRepository;
 

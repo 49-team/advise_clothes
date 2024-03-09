@@ -1,8 +1,9 @@
-package com.advise_clothes.backend.service;
+package com.advise_clothes.backend.service.impl;
 
 import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.repository.UserRepository;
-import com.advise_clothes.backend.service.security.Encryption;
+import com.advise_clothes.backend.config.Encryption;
+import com.advise_clothes.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,11 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final Encryption encryption;
     private final int NO_DELETE = 0;
-
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
 
     /**
      * 회원가입

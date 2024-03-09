@@ -1,8 +1,8 @@
 package com.advise_clothes.backend.controller;
 
 import com.advise_clothes.backend.domain.entity.Session;
-import com.advise_clothes.backend.service.SessionService;
-import com.advise_clothes.backend.service.UserService;
+import com.advise_clothes.backend.service.impl.SessionServiceImpl;
+import com.advise_clothes.backend.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping("/api/session")
 public class SessionController {
 
-    private final SessionService sessionService;
-    private final UserService userService;
+    private final SessionServiceImpl sessionService;
+    private final UserServiceImpl userService;
 
     @GetMapping("/{sessionKey}")
     public ResponseEntity<Session> getSession(@PathVariable String sessionKey) {

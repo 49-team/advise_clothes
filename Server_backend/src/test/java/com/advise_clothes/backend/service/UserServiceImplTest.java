@@ -3,6 +3,7 @@ package com.advise_clothes.backend.service;
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.repository.UserRepository;
+import com.advise_clothes.backend.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,10 @@ import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserServiceTest extends ServerBackendApplicationTests {
+class UserServiceImplTest extends ServerBackendApplicationTests {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private UserRepository userRepository;

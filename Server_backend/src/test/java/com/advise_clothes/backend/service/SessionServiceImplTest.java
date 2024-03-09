@@ -5,18 +5,18 @@ import com.advise_clothes.backend.domain.entity.Session;
 import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.repository.SessionRepository;
 import com.advise_clothes.backend.repository.UserRepository;
+import com.advise_clothes.backend.service.impl.SessionServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 
-import static com.advise_clothes.backend.domain.entity.Session.SessionType.BROWSER;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SessionServiceTest extends ServerBackendApplicationTests {
+class SessionServiceImplTest extends ServerBackendApplicationTests {
 
     @Autowired
-    private SessionService sessionService;
+    private SessionServiceImpl sessionService;
     @Autowired
     private SessionRepository sessionRepository;
     @Autowired

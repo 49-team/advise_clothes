@@ -8,7 +8,6 @@ import com.advise_clothes.backend.repository.ClothesRepository;
 import com.advise_clothes.backend.repository.CompanyRepository;
 import com.advise_clothes.backend.request.ClothesCreate;
 import com.advise_clothes.backend.request.ClothesEdit;
-import com.advise_clothes.backend.service.ClothesService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

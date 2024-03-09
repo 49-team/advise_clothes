@@ -1,8 +1,8 @@
-package com.advise_clothes.backend.service;
+package com.advise_clothes.backend.service.impl;
 
 import com.advise_clothes.backend.domain.entity.Session;
 import com.advise_clothes.backend.repository.SessionRepository;
-import com.advise_clothes.backend.service.security.Encryption;
+import com.advise_clothes.backend.config.Encryption;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class SessionService {
+public class SessionServiceImpl {
     private final SessionRepository sessionRepository;
     private final Encryption encryption;
 

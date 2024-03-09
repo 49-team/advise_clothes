@@ -3,15 +3,13 @@ package com.advise_clothes.backend.controller;
 import com.advise_clothes.backend.domain.entity.User;
 import com.advise_clothes.backend.request.UserCreate;
 import com.advise_clothes.backend.request.UserLogin;
-import com.advise_clothes.backend.service.SessionService;
-import com.advise_clothes.backend.service.UserService;
+import com.advise_clothes.backend.service.impl.SessionServiceImpl;
+import com.advise_clothes.backend.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,8 +18,8 @@ import java.util.List;
 public class UserController {
 
     // session check하는 private method 만들기
-    private final UserService userService;
-    private final SessionService sessionService;
+    private final UserServiceImpl userService;
+    private final SessionServiceImpl sessionService;
 
     /**
      * 유저 조회
