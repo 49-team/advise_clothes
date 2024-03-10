@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.Controller;
+package com.advise_clothes.backend.session.controller;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.session.repository.SessionRepository;

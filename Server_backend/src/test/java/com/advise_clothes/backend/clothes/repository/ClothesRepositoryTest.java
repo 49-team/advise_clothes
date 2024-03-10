@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.repository;
+package com.advise_clothes.backend.clothes.repository;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.clothes.entity.Clothes;

@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.service.security;
+package com.advise_clothes.backend.security;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import org.junit.jupiter.api.Test;

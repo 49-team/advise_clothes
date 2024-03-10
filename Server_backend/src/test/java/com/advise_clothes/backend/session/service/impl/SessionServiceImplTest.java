@@ -1,4 +1,4 @@
-package com.advise_clothes.backend.service;
+package com.advise_clothes.backend.session.service.impl;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.session.entity.Session;
