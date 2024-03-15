@@ -7,7 +7,6 @@
     <list default="true" id="46ba6331-d2ba-4e30-b7c9-707bdd90e368" name="변경" comment="백엔드 서버를 전역변수로 설정">
       <change beforePath="$PROJECT_DIR$/.idea/Project_advise_clothes_front.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project_advise_clothes_front.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server_backend/src/main/java/com/advise_clothes/backend/controller/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server_backend/src/main/java/com/advise_clothes/backend/controller/SessionController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,7 @@
       <workItem from="1674974719875" duration="10802000" />
       <workItem from="1682953990239" duration="191000" />
       <workItem from="1709652507671" duration="1244000" />
-      <workItem from="1709826353356" duration="617000" />
+      <workItem from="1709826353356" duration="2420000" />
     </task>
     <servers />
   </component>

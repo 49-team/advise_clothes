@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/session")
@@ -22,7 +24,7 @@ public class SessionController {
     @GetMapping("/{sessionKey}")
     public ResponseEntity<Session> getSession(@PathVariable String sessionKey) {
         Session sessionToFind = Session.builder()
-                .sessionKey(URLDecoder.decode(sessionKey, StandardCharsets.UTF_8))
+                .sessionKey(URLDecoder.decode(sessionKey, UTF_8))
                 .build();
 
         return sessionService.findBySessionKey(sessionToFind).map(value ->
@@ -43,7 +45,7 @@ public class SessionController {
     @DeleteMapping("/{sessionKey}")
     public ResponseEntity<Session> deleteSession(@PathVariable String sessionKey) {
         Session sessionToDelete = Session.builder()
-                .sessionKey(URLDecoder.decode(sessionKey, StandardCharsets.UTF_8))
+                .sessionKey(URLDecoder.decode(sessionKey, UTF_8))
                 .build();
 
         return sessionService.findBySessionKey(sessionToDelete).map(value ->

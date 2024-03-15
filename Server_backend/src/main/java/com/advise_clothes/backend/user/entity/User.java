@@ -31,9 +31,7 @@ public class User extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @ToString.Exclude
-//    @JsonBackReference
     @JsonIgnore
-//    @Builder.Default
     private List<Session> sessionList = new ArrayList<>();
 
     @Override

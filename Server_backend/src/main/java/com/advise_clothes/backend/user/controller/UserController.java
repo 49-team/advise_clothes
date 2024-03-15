@@ -1,9 +1,9 @@
 package com.advise_clothes.backend.user.controller;
 
-import com.advise_clothes.backend.user.entity.User;
+import com.advise_clothes.backend.session.service.impl.SessionServiceImpl;
 import com.advise_clothes.backend.user.dto.UserCreate;
 import com.advise_clothes.backend.user.dto.UserLogin;
-import com.advise_clothes.backend.session.service.impl.SessionServiceImpl;
+import com.advise_clothes.backend.user.entity.User;
 import com.advise_clothes.backend.user.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,6 @@ public class UserController {
 
     // session check하는 private method 만들기
     private final UserServiceImpl userService;
-    private final SessionServiceImpl sessionService;
 
     /**
      * 유저 조회
