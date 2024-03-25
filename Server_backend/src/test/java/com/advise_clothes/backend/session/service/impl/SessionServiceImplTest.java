@@ -2,11 +2,13 @@ package com.advise_clothes.backend.session.service.impl;
 
 import com.advise_clothes.backend.ServerBackendApplicationTests;
 import com.advise_clothes.backend.session.entity.Session;
-import com.advise_clothes.backend.user.entity.User;
 import com.advise_clothes.backend.session.repository.SessionRepository;
+import com.advise_clothes.backend.user.entity.User;
 import com.advise_clothes.backend.user.repository.UserRepository;
-import com.advise_clothes.backend.session.service.impl.SessionServiceImpl;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
@@ -72,7 +74,7 @@ class SessionServiceImplTest extends ServerBackendApplicationTests {
         String sessionKey = sessionRepository.findById(25L).get().getSessionKey();
 
         // when
-        Session session = sessionService.findBySessionKey(Session.builder()
+        Session session = sessionService.findByUser(Session.builder()
                 .sessionKey(sessionKey)
                 .build()
         ).orElseThrow(() -> new RuntimeException("세션을 찾지 못했습니다"));

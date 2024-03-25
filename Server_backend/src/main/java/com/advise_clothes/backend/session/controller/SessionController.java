@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -27,7 +26,7 @@ public class SessionController {
                 .sessionKey(URLDecoder.decode(sessionKey, UTF_8))
                 .build();
 
-        return sessionService.findBySessionKey(sessionToFind).map(value ->
+        return sessionService.findByUser(sessionToFind).map(value ->
             ResponseEntity.status(HttpStatus.OK).body(value))
         .orElseGet(() ->
             ResponseEntity.status(HttpStatus.NO_CONTENT).body(new Session()));
@@ -48,7 +47,7 @@ public class SessionController {
                 .sessionKey(URLDecoder.decode(sessionKey, UTF_8))
                 .build();
 
-        return sessionService.findBySessionKey(sessionToDelete).map(value ->
+        return sessionService.findByUser(sessionToDelete).map(value ->
             ResponseEntity.status(HttpStatus.OK).body(sessionService.delete(value))
         ).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Session()));
     }
